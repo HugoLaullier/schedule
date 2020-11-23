@@ -1,0 +1,160 @@
+{
+    "training": [{
+        "name": "MI",
+        "class": [{
+            "numbers": 50
+        }, {
+            "numbers": 30
+        }],
+        "subjects": [{
+                "name": "Mathematics",
+                "hours_per_week": 10,
+                "room": "TD"
+            },
+            {
+                "name": "Physics",
+                "hours_per_week": 2,
+                "room": "TD"
+            },
+            {
+                "name": "Physics",
+                "hours_per_week": 2,
+                "room": "TP"
+            },
+            {
+                "name": "Computer Science",
+                "hours_per_week": 4,
+                "room": "TD"
+            },
+            {
+                "name": "Computer Science",
+                "hours_per_week": 4,
+                "room": "TP"
+            },
+            {
+                "name": "English",
+                "hours_per_week": 4,
+                "room": "labo"
+            }
+        ]
+    }, {
+        "name": "PI",
+        "class": [{
+            "numbers": 25
+        }, {
+            "numbers": 20
+        }],
+        "subjects": [{
+                "name": "Mathematics",
+                "hours_per_week": 4,
+                "room": "TD"
+            },
+            {
+                "name": "Physics",
+                "hours_per_week": 4,
+                "room": "TD"
+            },
+            {
+                "name": "Physics",
+                "hours_per_week": 6,
+                "room": "TP"
+            },
+            {
+                "name": "Computer Science",
+                "hours_per_week": 6,
+                "room": "TD"
+            },
+            {
+                "name": "Computer Science",
+                "hours_per_week": 2,
+                "room": "TP"
+            },
+            {
+                "name": "English",
+                "hours_per_week": 4,
+                "room": "labo"
+            }
+        ]
+    }],
+    "teachers": [{
+            "id": 1,
+            "subject": "Mathematics",
+            "hours_per_week": 12
+        },
+        {
+            "id": 2,
+            "subject": "Mathematics",
+            "hours_per_week": 10
+        },
+        {
+            "id": 3,
+            "subject": "Mathematics",
+            "hours_per_week": 8
+        },
+        {
+            "id": 1,
+            "subject": "Physics",
+            "hours_per_week": 10
+        },
+        {
+            "id": 2,
+            "subject": "Physics",
+            "hours_per_week": 10
+        },
+        {
+            "id": 3,
+            "subject": "Physics",
+            "hours_per_week": 10
+        },
+        {
+            "id": 1,
+            "subject": "Compute Science",
+            "hours_per_week": 12
+        },
+        {
+            "id": 2,
+            "subject": "Compute Science",
+            "hours_per_week": 12
+        },
+        {
+            "id": 3,
+            "subject": "Compute Science",
+            "hours_per_week": 12
+        },
+        {
+            "id": 1,
+            "subject": "English",
+            "hours_per_week": 12
+        },
+        {
+            "id": 2,
+            "subject": "English",
+            "hours_per_week": 4
+        }
+    ],
+    "rooms": [{
+            "id": 1,
+            "type": "TD",
+            "places": 40
+        },
+        {
+            "id": 2,
+            "type": "TD",
+            "places": 40
+        },
+        {
+            "id": 3,
+            "type": "TD",
+            "places": 40
+        },
+        {
+            "id": 1,
+            "type": "TP",
+            "places": 20
+        },
+        {
+            "id": 1,
+            "type": "labo"
+        }
+    ]
+}
