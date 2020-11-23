@@ -1,0 +1,21 @@
+{
+    "costs": [{
+        "type": "Very High",
+        "cost": 1000000
+    }, {
+        "type": "High Teachers",
+        "cost": 50
+    }, {
+        "type": "Medium Teachers",
+        "cost": 10
+    }, {
+        "type": "Low Teachers",
+        "cost": 3
+    }, {
+        "type": "Medium Students",
+        "cost": 3
+    }, {
+        "type": "Low Students",
+        "cost": 1
+    }]
+}
