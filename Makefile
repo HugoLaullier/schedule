@@ -1,8 +1,11 @@
 all:
-	g++ src/reader.cpp -o bin/exe
+	easena ez/schedule.ez
+
+compile:
+	cd ez && make
 
 run:
-	./bin/exe
+	cd ez && ./schedule
 
 clean:
 	rm bin/exe

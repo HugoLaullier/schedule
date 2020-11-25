@@ -1,0 +1,154 @@
+/*-----------------------------------------------------------------------------
+BALZANO Antoine
+LAULLIER Hugo
+-----------------------------------------------------------------------------*/
+
+\User declarations :
+#include "../include/rapidjson/document.h"
+#include "../include/rapidjson/istreamwrapper.h"
+#include "../include/rapidjson/writer.h"
+#include "../include/rapidjson/stringbuffer.h"
+#include <fstream>
+#include <iostream>
+#include <vector>
+#define NB_SCHEDULES 4
+#define NB_COURSES 10
+
+enum subject_t {
+    MATHEMATICS, 
+    PHYSICS_TD, 
+    PHYSICS_TP,
+    COMPUTER_SCIENCE_TD,
+    COMPUTER_SCIENCE_TP,
+    ENGLISH
+};
+
+enum formation_name_t {MI, PI};
+
+\end
+
+\User functions:
+int getData()
+{
+  ifstream ifs("../json/in/params.json");
+  if (!ifs.is_open())
+  {
+      std::cerr << "Could not open file for reading!\n";
+      return EXIT_FAILURE;
+  }
+
+  rapidjson::IStreamWrapper isw(ifs);
+
+  rapidjson::Document doc{};
+  doc.ParseStream(isw);
+  
+  std::cout << doc["teachers"].Size() << std::endl;
+
+  for (rapidjson::SizeType i = 0; i < doc["teachers"].Size(); i++)
+  {
+      if (doc["teachers"][i]["subject"] == "Mathematics")
+          std::cout << doc["teachers"][i]["id"].GetInt() << std::endl;
+  }
+}
+\end
+
+\User CUDA:
+\end
+
+\Before everything else function:
+getData();
+\end
+
+\After everything else function:
+\end
+
+\At the beginning of each generation function:
+\end
+
+\At the end of each generation function:
+\end
+
+\At each generation before reduce function:
+\end
+
+\User classes :
+Training {
+    int formation_name;
+    int nb_of_students;
+}
+
+Teacher {
+    int teacher_id;   // index of the teacher in teacher array
+    // add specific constraint for a teacher here (vector of constraints)
+    // maybe add a struct/Class for constraints
+    int subject;
+    int hours_per_week;
+}
+
+Course {
+    // TODO read data.json and put rooms and teachers in 2 arrays
+    Teacher teacher;
+    int room_id;      // index of the room in room array
+    Training training;
+}
+
+Schedule {
+    Course courses[NB_COURSES]; 
+}
+
+
+GenomeClass {
+    Schedule schedules[NB_SCHEDULES];
+}
+\end
+
+\GenomeClass::display:
+\end
+
+\GenomeClass::initializer : 
+\end
+
+\GenomeClass::crossover :
+// create child (initialized to parent1) out of parent1 and parent2 
+\end
+
+\GenomeClass::mutator: // all the values in here are found by trial and error
+\end
+
+\GenomeClass::evaluator: // Returns the score
+\end
+
+\User Makefile options:
+\end
+
+\Default run parameters :
+    Number of generations : 100    // NB_GEN
+    Time limit: 0                  // In seconds, 0 to deactivate
+    Population size : 4096 
+    Offspring size : 100% 
+    Mutation probability : 1       // MUT_PROB
+    Crossover probability : 1      // XOVER_PROB
+    Evaluator goal : minimise      // Maximise
+    Selection operator: Tournament 10
+    Surviving parents: 100%        // percentage or absolute  
+    Surviving offspring: 100%
+    Reduce parents operator: Tournament 2
+    Reduce offspring operator: Tournament 2
+    Final reduce operator: Tournament 7
+    Elitism: weak   // Weak (best of parents+offspring) or 
+                    //Strong (best of parents)
+    Elite: 1
+    Print stats: true
+    Generate csv stats file:false
+    Generate gnuplot script:false
+    Generate R script:false
+    Plot stats:true
+
+    Remote island model: true      // run ./schedule --serverPort 2930
+    IP file: ip.txt                // File containing all the remote island's IP
+    Server port : 2929             // why not
+    Migration probability: 0.333 
+
+    Save population: false
+    Start from file:false
+\end
