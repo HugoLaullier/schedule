@@ -16,21 +16,21 @@ LAULLIER Hugo
 
 enum subject_t {
     MATHEMATICS, 
-    PHYSICS_TD, 
-    PHYSICS_TP,
-    COMPUTER_SCIENCE_TD,
-    COMPUTER_SCIENCE_TP,
+    PHYSICS, 
+    COMPUTER_SCIENCE,
     ENGLISH
 };
 
 enum formation_name_t {MI, PI};
+
+Teacher* teachers;
 
 \end
 
 \User functions:
 int getData()
 {
-  ifstream ifs("../json/in/params.json");
+  ifstream ifs("../json/in/data.json");
   if (!ifs.is_open())
   {
       std::cerr << "Could not open file for reading!\n";
@@ -41,13 +41,26 @@ int getData()
 
   rapidjson::Document doc{};
   doc.ParseStream(isw);
-  
-  std::cout << doc["teachers"].Size() << std::endl;
+
+  teachers = (Teacher *) malloc(doc["teachers"].Size()*sizeof(Teacher));
 
   for (rapidjson::SizeType i = 0; i < doc["teachers"].Size(); i++)
   {
-      if (doc["teachers"][i]["subject"] == "Mathematics")
-          std::cout << doc["teachers"][i]["id"].GetInt() << std::endl;
+      Teacher teacher;
+      teacher.id = doc["teachers"][i]["id"].GetInt();
+      if(doc["teachers"][i]["subject"] == "Mathematics")
+        teacher.subject = MATHEMATICS;
+        else if(doc["teachers"][i]["subject"] == "Physics")
+        teacher.subject = PHYSICS;
+        else if(doc["teachers"][i]["subject"] == "Computer Science")
+        teacher.subject = COMPUTER_SCIENCE;
+        else if(doc["teachers"][i]["subject"] == "English")
+        teacher.subject = ENGLISH;
+        else
+            std::cerr << doc["teachers"][i]["subject"].GetString() << " is not a subject" << std::endl;
+      teacher.hours_per_week = doc["teachers"][i]["hours_per_week"].GetInt();
+
+      teachers[i] = teacher;      
   }
 }
 \end
@@ -78,7 +91,7 @@ Training {
 }
 
 Teacher {
-    int teacher_id;   // index of the teacher in teacher array
+    int id;   // index of the teacher in teacher array
     // add specific constraint for a teacher here (vector of constraints)
     // maybe add a struct/Class for constraints
     int subject;

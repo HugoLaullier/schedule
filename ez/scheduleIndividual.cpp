@@ -41,14 +41,14 @@ extern CEvolutionaryAlgorithm* EA;
 
 enum subject_t {
     MATHEMATICS, 
-    PHYSICS_TD, 
-    PHYSICS_TP,
-    COMPUTER_SCIENCE_TD,
-    COMPUTER_SCIENCE_TP,
+    PHYSICS, 
+    COMPUTER_SCIENCE,
     ENGLISH
 };
 
 enum formation_name_t {MI, PI};
+
+Teacher* teachers;
 
 
 
@@ -60,7 +60,7 @@ enum formation_name_t {MI, PI};
 
 int getData()
 {
-  ifstream ifs("../json/in/params.json");
+  ifstream ifs("../json/in/data.json");
   if (!ifs.is_open())
   {
       std::cerr << "Could not open file for reading!\n";
@@ -71,26 +71,41 @@ int getData()
 
   rapidjson::Document doc{};
   doc.ParseStream(isw);
-  
-  std::cout << doc["teachers"].Size() << std::endl;
+
+  teachers = (Teacher *) malloc(doc["teachers"].Size()*sizeof(Teacher));
 
   for (rapidjson::SizeType i = 0; i < doc["teachers"].Size(); i++)
   {
-      if (doc["teachers"][i]["subject"] == "Mathematics")
-          std::cout << doc["teachers"][i]["id"].GetInt() << std::endl;
+      Teacher teacher;
+      teacher.id = doc["teachers"][i]["id"].GetInt();
+      if(doc["teachers"][i]["subject"] == "Mathematics")
+        teacher.subject = MATHEMATICS;
+        else if(doc["teachers"][i]["subject"] == "Physics")
+        teacher.subject = PHYSICS;
+        else if(doc["teachers"][i]["subject"] == "Computer Science")
+        teacher.subject = COMPUTER_SCIENCE;
+        else if(doc["teachers"][i]["subject"] == "English")
+        teacher.subject = ENGLISH;
+        else
+            std::cerr << doc["teachers"][i]["subject"].GetString() << " is not a subject" << std::endl;
+      teacher.hours_per_week = doc["teachers"][i]["hours_per_week"].GetInt();
+
+      teachers[i] = teacher;      
   }
+  std::cout << "lol" << std::endl;
 }
 
 
 // Initialisation function
 void EASEAInitFunction(int argc, char *argv[]){
-#line 58 "ez/schedule.ez"
+#line 72 "ez/schedule.ez"
 
+getData();
 }
 
 // Finalization function
 void EASEAFinalization(CPopulation* population){
-#line 61 "ez/schedule.ez"
+#line 76 "ez/schedule.ez"
 
 }
 
@@ -115,9 +130,9 @@ void scheduleFinal(CPopulation* pop){
 }
 
 void EASEABeginningGenerationFunction(CEvolutionaryAlgorithm* evolutionaryAlgorithm){
-	#line 155 "ez/schedule.ez"
+	#line 170 "ez/schedule.ez"
 {
-#line 64 "ez/schedule.ez"
+#line 79 "ez/schedule.ez"
 
 }
 }
@@ -138,7 +153,7 @@ void EASEAGenerationFunctionBeforeReplacement(CEvolutionaryAlgorithm* evolutiona
 IndividualImpl::IndividualImpl() : CIndividual() {
    
   // Genome Initialiser
-#line 107 "ez/schedule.ez"
+#line 122 "ez/schedule.ez"
  
 
   valid = false;
@@ -160,7 +175,7 @@ float IndividualImpl::evaluate(){
     return fitness;
   else{
     valid = true;
-    #line 117 "ez/schedule.ez"
+    #line 132 "ez/schedule.ez"
  // Returns the score
 
   }
@@ -226,7 +241,7 @@ CIndividual* IndividualImpl::crossover(CIndividual** ps){
 
 	// ********************
 	// Problem specific part
-  	#line 110 "ez/schedule.ez"
+  	#line 125 "ez/schedule.ez"
 
 // create child (initialized to parent1) out of parent1 and parent2 
 
@@ -263,7 +278,7 @@ void IndividualImpl::mutate( float pMutationPerGene ){
 
   // ********************
   // Problem specific part
-  #line 114 "ez/schedule.ez"
+  #line 129 "ez/schedule.ez"
  // all the values in here are found by trial and error
 
 }

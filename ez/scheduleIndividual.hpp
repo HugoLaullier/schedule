@@ -81,7 +81,7 @@ public:
   Teacher(const Teacher &EASEA_Var) {  // Copy constructor
     hours_per_week=EASEA_Var.hours_per_week;
     subject=EASEA_Var.subject;
-    teacher_id=EASEA_Var.teacher_id;
+    id=EASEA_Var.id;
   }
   virtual ~Teacher() {  // Destructor
   }
@@ -89,27 +89,27 @@ public:
   	ostringstream EASEA_Line(ios_base::app);
 	EASEA_Line << this->hours_per_week << " ";
 	EASEA_Line << this->subject << " ";
-	EASEA_Line << this->teacher_id << " ";
+	EASEA_Line << this->id << " ";
   	return EASEA_Line.str();
   }
   void deserializer(istringstream* EASEA_Line) {  // deserialize
   	string line;
 	(*EASEA_Line) >> this->hours_per_week;
 	(*EASEA_Line) >> this->subject;
-	(*EASEA_Line) >> this->teacher_id;
+	(*EASEA_Line) >> this->id;
   }
   Teacher& operator=(const Teacher &EASEA_Var) {  // Operator=
     if (&EASEA_Var == this) return *this;
     hours_per_week = EASEA_Var.hours_per_week;
     subject = EASEA_Var.subject;
-    teacher_id = EASEA_Var.teacher_id;
+    id = EASEA_Var.id;
   return *this;
   }
 
   bool operator==(Teacher &EASEA_Var) const {  // Operator==
     if (hours_per_week!=EASEA_Var.hours_per_week) return false;
     if (subject!=EASEA_Var.subject) return false;
-    if (teacher_id!=EASEA_Var.teacher_id) return false;
+    if (id!=EASEA_Var.id) return false;
   return true;
   }
 
@@ -118,14 +118,14 @@ public:
   friend ostream& operator<< (ostream& os, const Teacher& EASEA_Var) { // Output stream insertion operator
     os <<  "hours_per_week:" << EASEA_Var.hours_per_week << "\n";
     os <<  "subject:" << EASEA_Var.subject << "\n";
-    os <<  "teacher_id:" << EASEA_Var.teacher_id << "\n";
+    os <<  "id:" << EASEA_Var.id << "\n";
     return os;
   }
 
 // Class members 
   int hours_per_week;
   int subject;
-  int teacher_id;
+  int id;
 };
 
 class Course {
