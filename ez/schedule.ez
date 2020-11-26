@@ -21,9 +21,18 @@ enum subject_t {
     ENGLISH
 };
 
+enum room_type_t {
+    TP,
+    TD,
+    LABO
+};
+
 enum formation_name_t {MI, PI};
 
 Teacher* teachers;
+Room* rooms;
+Promotion* promotions;
+Training* trainings;
 
 \end
 
@@ -47,7 +56,7 @@ int getData()
   for (rapidjson::SizeType i = 0; i < doc["teachers"].Size(); i++)
   {
       Teacher teacher;
-      teacher.id = doc["teachers"][i]["id"].GetInt();
+      teacher.id = i;
       if(doc["teachers"][i]["subject"] == "Mathematics")
         teacher.subject = MATHEMATICS;
         else if(doc["teachers"][i]["subject"] == "Physics")
@@ -62,6 +71,75 @@ int getData()
 
       teachers[i] = teacher;      
   }
+
+  rooms = (Room *) malloc(doc["rooms"].Size()*sizeof(Teacher));
+  for (rapidjson::SizeType i = 0; i < doc["rooms"].Size(); i++)
+  {
+      Room room;
+      room.id = i;
+      if(doc["rooms"][i]["type"] == "TP")
+        room.type = TP;
+        else if(doc["rooms"][i]["type"] == "TD")
+        room.type = TD;
+        else if(doc["rooms"][i]["type"] == "labo")
+        room.type = LABO;
+        else
+            std::cerr << doc["rooms"][i]["type"].GetString() << " is not a type of room" << std::endl;
+      room.places = doc["rooms"][i]["places"].GetInt();
+
+      rooms[i] = room;      
+  }
+
+  promotions = (Promotion *) malloc(doc["promotions"].Size()*sizeof(Promotion));
+  for (rapidjson::SizeType i = 0; i < doc["promotions"].Size(); i++)
+  {
+      Promotion promotion;
+      promotion.id = i;
+      if(doc["promotions"][i]["training"] == "MI")
+        promotion.type = MI;
+        else if(doc["promotions"][i]["training"] == "PI")
+        promotion.type = PI;
+        else
+            std::cerr << doc["promotions"][i]["training"].GetString() << " is not a training" << std::endl;
+      promotion.places = doc["promotions"][i]["nb_of_students"].GetInt();
+
+      promotions[i] = promotion;      
+  }
+
+  trainings = (Training *) malloc(doc["trainings"].Size()*sizeof(Training));
+  for (rapidjson::SizeType i = 0; i < doc["trainings"].Size(); i++)
+  {
+      Promotion promotion;
+      if(doc["trainings"][i]["name"] == "MI")
+        promotion.type = MI;
+        else if(doc["trainings"][i]["name"] == "PI")
+        promotion.type = PI;
+        else
+            std::cerr << doc["trainings"][i]["name"].GetString() << " is not a training" << std::endl;
+      Subject* subjects = (Subject *) malloc(doc["trainings"][i]["subjects"].Size()*sizeof(Subject));
+      for (rapidjson::SizeType j = 0; j < doc["trainings"][i]["subjects"].Size(); j++)
+      {
+          Subject subject;
+          if(doc["trainings"][i]["subjects"][j]["name"] == "Mathematics")
+        subject.name = MATHEMATICS;
+        else if(doc["trainings"][i]["subjects"][j]["name"] == "Physics")
+        subject.name = PHYSICS;
+        else if(doc["trainings"][i]["subjects"][j]["name"] == "Computer Science")
+        subject.name = COMPUTER_SCIENCE;
+        else if(doc["trainings"][i]["subjects"][j]["name"] == "English")
+        subject.name = ENGLISH;
+        else
+            std::cerr << doc["trainings"][i]["subjects"][j]["name"].GetString() << " is not a subject" << std::endl;
+        subjects[i]=subject
+      }
+
+      promotion[i].subjects = subjects;
+
+      promotions[i] = promotion;      
+  }
+
+
+
 }
 \end
 
@@ -85,13 +163,31 @@ getData();
 \end
 
 \User classes :
-Training {
-    int formation_name;
+Promotion {
+    int id;
+    int training;
     int nb_of_students;
 }
 
+Subject {
+    int name;
+    int hours_per_week;
+    int room;
+}
+
+Training {
+    int name;
+    Subject * subjects;
+}
+
+Room {
+    int id;
+    int type;
+    int places;
+}
+
 Teacher {
-    int id;   // index of the teacher in teacher array
+    int id;   // teacher id
     // add specific constraint for a teacher here (vector of constraints)
     // maybe add a struct/Class for constraints
     int subject;
@@ -99,10 +195,9 @@ Teacher {
 }
 
 Course {
-    // TODO read data.json and put rooms and teachers in 2 arrays
-    Teacher teacher;
-    int room_id;      // index of the room in room array
-    Training training;
+    int subject;
+    int teacher_id;
+    int room_id;     
 }
 
 Schedule {
@@ -111,7 +206,7 @@ Schedule {
 
 
 GenomeClass {
-    Schedule schedules[NB_SCHEDULES];
+    Schedule *schedules;
 }
 \end
 

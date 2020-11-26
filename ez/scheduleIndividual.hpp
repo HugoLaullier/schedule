@@ -25,162 +25,59 @@ extern int OFFSPRING_SIZE;
 
 // User classes
 
-class Training {
-public:
-// Default methods for class Training
-  Training(){  // Constructor
-  }
-  Training(const Training &EASEA_Var) {  // Copy constructor
-    nb_of_students=EASEA_Var.nb_of_students;
-    formation_name=EASEA_Var.formation_name;
-  }
-  virtual ~Training() {  // Destructor
-  }
-  string serializer() {  // serialize
-  	ostringstream EASEA_Line(ios_base::app);
-	EASEA_Line << this->nb_of_students << " ";
-	EASEA_Line << this->formation_name << " ";
-  	return EASEA_Line.str();
-  }
-  void deserializer(istringstream* EASEA_Line) {  // deserialize
-  	string line;
-	(*EASEA_Line) >> this->nb_of_students;
-	(*EASEA_Line) >> this->formation_name;
-  }
-  Training& operator=(const Training &EASEA_Var) {  // Operator=
-    if (&EASEA_Var == this) return *this;
-    nb_of_students = EASEA_Var.nb_of_students;
-    formation_name = EASEA_Var.formation_name;
-  return *this;
-  }
-
-  bool operator==(Training &EASEA_Var) const {  // Operator==
-    if (nb_of_students!=EASEA_Var.nb_of_students) return false;
-    if (formation_name!=EASEA_Var.formation_name) return false;
-  return true;
-  }
-
-  bool operator!=(Training &EASEA_Var) const {return !(*this==EASEA_Var);} // operator!=
-
-  friend ostream& operator<< (ostream& os, const Training& EASEA_Var) { // Output stream insertion operator
-    os <<  "nb_of_students:" << EASEA_Var.nb_of_students << "\n";
-    os <<  "formation_name:" << EASEA_Var.formation_name << "\n";
-    return os;
-  }
-
-// Class members 
-  int nb_of_students;
-  int formation_name;
-};
-
-class Teacher {
-public:
-// Default methods for class Teacher
-  Teacher(){  // Constructor
-  }
-  Teacher(const Teacher &EASEA_Var) {  // Copy constructor
-    hours_per_week=EASEA_Var.hours_per_week;
-    subject=EASEA_Var.subject;
-    id=EASEA_Var.id;
-  }
-  virtual ~Teacher() {  // Destructor
-  }
-  string serializer() {  // serialize
-  	ostringstream EASEA_Line(ios_base::app);
-	EASEA_Line << this->hours_per_week << " ";
-	EASEA_Line << this->subject << " ";
-	EASEA_Line << this->id << " ";
-  	return EASEA_Line.str();
-  }
-  void deserializer(istringstream* EASEA_Line) {  // deserialize
-  	string line;
-	(*EASEA_Line) >> this->hours_per_week;
-	(*EASEA_Line) >> this->subject;
-	(*EASEA_Line) >> this->id;
-  }
-  Teacher& operator=(const Teacher &EASEA_Var) {  // Operator=
-    if (&EASEA_Var == this) return *this;
-    hours_per_week = EASEA_Var.hours_per_week;
-    subject = EASEA_Var.subject;
-    id = EASEA_Var.id;
-  return *this;
-  }
-
-  bool operator==(Teacher &EASEA_Var) const {  // Operator==
-    if (hours_per_week!=EASEA_Var.hours_per_week) return false;
-    if (subject!=EASEA_Var.subject) return false;
-    if (id!=EASEA_Var.id) return false;
-  return true;
-  }
-
-  bool operator!=(Teacher &EASEA_Var) const {return !(*this==EASEA_Var);} // operator!=
-
-  friend ostream& operator<< (ostream& os, const Teacher& EASEA_Var) { // Output stream insertion operator
-    os <<  "hours_per_week:" << EASEA_Var.hours_per_week << "\n";
-    os <<  "subject:" << EASEA_Var.subject << "\n";
-    os <<  "id:" << EASEA_Var.id << "\n";
-    return os;
-  }
-
-// Class members 
-  int hours_per_week;
-  int subject;
-  int id;
-};
-
 class Course {
 public:
 // Default methods for class Course
   Course(){  // Constructor
   }
   Course(const Course &EASEA_Var) {  // Copy constructor
-    training=EASEA_Var.training;
     room_id=EASEA_Var.room_id;
-    teacher=EASEA_Var.teacher;
+    teacher_id=EASEA_Var.teacher_id;
+    subject=EASEA_Var.subject;
   }
   virtual ~Course() {  // Destructor
   }
   string serializer() {  // serialize
   	ostringstream EASEA_Line(ios_base::app);
-		EASEA_Line << this->training.serializer() <<" ";
 	EASEA_Line << this->room_id << " ";
-		EASEA_Line << this->teacher.serializer() <<" ";
+	EASEA_Line << this->teacher_id << " ";
+	EASEA_Line << this->subject << " ";
   	return EASEA_Line.str();
   }
   void deserializer(istringstream* EASEA_Line) {  // deserialize
   	string line;
-		this->training.deserializer(EASEA_Line);
 	(*EASEA_Line) >> this->room_id;
-		this->teacher.deserializer(EASEA_Line);
+	(*EASEA_Line) >> this->teacher_id;
+	(*EASEA_Line) >> this->subject;
   }
   Course& operator=(const Course &EASEA_Var) {  // Operator=
     if (&EASEA_Var == this) return *this;
-    training = EASEA_Var.training;
     room_id = EASEA_Var.room_id;
-    teacher = EASEA_Var.teacher;
+    teacher_id = EASEA_Var.teacher_id;
+    subject = EASEA_Var.subject;
   return *this;
   }
 
   bool operator==(Course &EASEA_Var) const {  // Operator==
-    if (training!=EASEA_Var.training) return false;
     if (room_id!=EASEA_Var.room_id) return false;
-    if (teacher!=EASEA_Var.teacher) return false;
+    if (teacher_id!=EASEA_Var.teacher_id) return false;
+    if (subject!=EASEA_Var.subject) return false;
   return true;
   }
 
   bool operator!=(Course &EASEA_Var) const {return !(*this==EASEA_Var);} // operator!=
 
   friend ostream& operator<< (ostream& os, const Course& EASEA_Var) { // Output stream insertion operator
-    os <<  "training:" << EASEA_Var.training << "\n";
     os <<  "room_id:" << EASEA_Var.room_id << "\n";
-    os <<  "teacher:" << EASEA_Var.teacher << "\n";
+    os <<  "teacher_id:" << EASEA_Var.teacher_id << "\n";
+    os <<  "subject:" << EASEA_Var.subject << "\n";
     return os;
   }
 
 // Class members 
-  Training training;
   int room_id;
-  Teacher teacher;
+  int teacher_id;
+  int subject;
 };
 
 class Schedule {
@@ -238,7 +135,7 @@ class IndividualImpl : public CIndividual {
 public: // in schedule the genome is public (for user functions,...)
 	// Class members
   	// Class members 
-  Schedule schedules[4];
+  Schedule *schedules;
 
 
 public:

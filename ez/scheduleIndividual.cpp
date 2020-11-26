@@ -46,9 +46,18 @@ enum subject_t {
     ENGLISH
 };
 
+enum room_type_t {
+    TP,
+    TD,
+    LABO
+};
+
 enum formation_name_t {MI, PI};
 
 Teacher* teachers;
+Room* rooms;
+Promotion* promotions;
+Training* trainings;
 
 
 
@@ -56,7 +65,7 @@ Teacher* teachers;
 
 // User functions
 
-#line 31 "ez/schedule.ez"
+#line 40 "ez/schedule.ez"
 
 int getData()
 {
@@ -77,7 +86,7 @@ int getData()
   for (rapidjson::SizeType i = 0; i < doc["teachers"].Size(); i++)
   {
       Teacher teacher;
-      teacher.id = doc["teachers"][i]["id"].GetInt();
+      teacher.id = i;
       if(doc["teachers"][i]["subject"] == "Mathematics")
         teacher.subject = MATHEMATICS;
         else if(doc["teachers"][i]["subject"] == "Physics")
@@ -92,20 +101,88 @@ int getData()
 
       teachers[i] = teacher;      
   }
-  std::cout << "lol" << std::endl;
+
+  rooms = (Room *) malloc(doc["rooms"].Size()*sizeof(Teacher));
+  for (rapidjson::SizeType i = 0; i < doc["rooms"].Size(); i++)
+  {
+      Room room;
+      room.id = i;
+      if(doc["rooms"][i]["type"] == "TP")
+        room.type = TP;
+        else if(doc["rooms"][i]["type"] == "TD")
+        room.type = TD;
+        else if(doc["rooms"][i]["type"] == "labo")
+        room.type = LABO;
+        else
+            std::cerr << doc["rooms"][i]["type"].GetString() << " is not a type of room" << std::endl;
+      room.places = doc["rooms"][i]["places"].GetInt();
+
+      rooms[i] = room;      
+  }
+
+  promotions = (Promotion *) malloc(doc["promotions"].Size()*sizeof(Promotion));
+  for (rapidjson::SizeType i = 0; i < doc["promotions"].Size(); i++)
+  {
+      Promotion promotion;
+      promotion.id = i;
+      if(doc["promotions"][i]["training"] == "MI")
+        promotion.type = MI;
+        else if(doc["promotions"][i]["training"] == "PI")
+        promotion.type = PI;
+        else
+            std::cerr << doc["promotions"][i]["training"].GetString() << " is not a training" << std::endl;
+      promotion.places = doc["promotions"][i]["nb_of_students"].GetInt();
+
+      promotions[i] = promotion;      
+  }
+
+  trainings = (Training *) malloc(doc["trainings"].Size()*sizeof(Training));
+  for (rapidjson::SizeType i = 0; i < doc["trainings"].Size(); i++)
+  {
+      Promotion promotion;
+      if(doc["trainings"][i]["name"] == "MI")
+        promotion.type = MI;
+        else if(doc["trainings"][i]["name"] == "PI")
+        promotion.type = PI;
+        else
+            std::cerr << doc["trainings"][i]["name"].GetString() << " is not a training" << std::endl;
+      Subject* subjects = (Subject *) malloc(doc["trainings"][i]["subjects"].Size()*sizeof(Subject));
+      for (rapidjson::SizeType j = 0; j < doc["trainings"][i]["subjects"].Size(); j++)
+      {
+          Subject subject;
+          if(doc["trainings"][i]["subjects"][j]["name"] == "Mathematics")
+        subject.name = MATHEMATICS;
+        else if(doc["trainings"][i]["subjects"][j]["name"] == "Physics")
+        subject.name = PHYSICS;
+        else if(doc["trainings"][i]["subjects"][j]["name"] == "Computer Science")
+        subject.name = COMPUTER_SCIENCE;
+        else if(doc["trainings"][i]["subjects"][j]["name"] == "English")
+        subject.name = ENGLISH;
+        else
+            std::cerr << doc["trainings"][i]["subjects"][j]["name"].GetString() << " is not a subject" << std::endl;
+        subjects[i]=subject
+      }
+
+      promotion[i].subjects = subjects;
+
+      promotions[i] = promotion;      
+  }
+
+
+
 }
 
 
 // Initialisation function
 void EASEAInitFunction(int argc, char *argv[]){
-#line 72 "ez/schedule.ez"
+#line 149 "ez/schedule.ez"
 
 getData();
 }
 
 // Finalization function
 void EASEAFinalization(CPopulation* population){
-#line 76 "ez/schedule.ez"
+#line 153 "ez/schedule.ez"
 
 }
 
@@ -130,9 +207,9 @@ void scheduleFinal(CPopulation* pop){
 }
 
 void EASEABeginningGenerationFunction(CEvolutionaryAlgorithm* evolutionaryAlgorithm){
-	#line 170 "ez/schedule.ez"
+	#line 264 "ez/schedule.ez"
 {
-#line 79 "ez/schedule.ez"
+#line 156 "ez/schedule.ez"
 
 }
 }
@@ -151,9 +228,10 @@ void EASEAGenerationFunctionBeforeReplacement(CEvolutionaryAlgorithm* evolutiona
 
 
 IndividualImpl::IndividualImpl() : CIndividual() {
-   
+      schedules=NULL;
+ 
   // Genome Initialiser
-#line 122 "ez/schedule.ez"
+#line 216 "ez/schedule.ez"
  
 
   valid = false;
@@ -166,6 +244,8 @@ CIndividual* IndividualImpl::clone(){
 
 IndividualImpl::~IndividualImpl(){
   // Destructing pointers
+  if (schedules) delete schedules;
+  schedules=NULL;
 
 }
 
@@ -175,7 +255,7 @@ float IndividualImpl::evaluate(){
     return fitness;
   else{
     valid = true;
-    #line 132 "ez/schedule.ez"
+    #line 226 "ez/schedule.ez"
  // Returns the score
 
   }
@@ -190,8 +270,12 @@ void IndividualImpl::boundChecking(){
 string IndividualImpl::serialize(){
     ostringstream EASEA_Line(ios_base::app);
     // Memberwise serialization
-	for(int EASEA_Ndx=0; EASEA_Ndx<4; EASEA_Ndx++)
-		EASEA_Line << this->schedules[EASEA_Ndx].serializer() <<" ";
+	if(this->schedules != NULL){
+		EASEA_Line << "\a ";
+		EASEA_Line << this->schedules->serializer() << " ";
+	}
+	else
+		EASEA_Line << "NULL" << " ";
 
     EASEA_Line << this->fitness;
     return EASEA_Line.str();
@@ -201,9 +285,13 @@ void IndividualImpl::deserialize(string Line){
     istringstream EASEA_Line(Line);
     string line;
     // Memberwise deserialization
-	for(int EASEA_Ndx=0; EASEA_Ndx<4; EASEA_Ndx++)
-		this->schedules[EASEA_Ndx].deserializer(&EASEA_Line);
-
+	EASEA_Line >> line;
+	if(strcmp(line.c_str(),"NULL")==0)
+		this->schedules = NULL;
+	else{
+		this->schedules = new Schedule;
+		this->schedules->deserializer(&EASEA_Line);
+	}
     EASEA_Line >> this->fitness;
     this->valid=true;
     this->isImmigrant = false;
@@ -214,8 +302,7 @@ IndividualImpl::IndividualImpl(const IndividualImpl& genome){
   // ********************
   // Problem specific part
   // Memberwise copy
-    {for(int EASEA_Ndx=0; EASEA_Ndx<4; EASEA_Ndx++)
-       schedules[EASEA_Ndx]=genome.schedules[EASEA_Ndx];}
+    schedules=(genome.schedules ? new Schedule(*(genome.schedules)) : NULL);
 
 
 
@@ -241,7 +328,7 @@ CIndividual* IndividualImpl::crossover(CIndividual** ps){
 
 	// ********************
 	// Problem specific part
-  	#line 125 "ez/schedule.ez"
+  	#line 219 "ez/schedule.ez"
 
 // create child (initialized to parent1) out of parent1 and parent2 
 
@@ -278,7 +365,7 @@ void IndividualImpl::mutate( float pMutationPerGene ){
 
   // ********************
   // Problem specific part
-  #line 129 "ez/schedule.ez"
+  #line 223 "ez/schedule.ez"
  // all the values in here are found by trial and error
 
 }
