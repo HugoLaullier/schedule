@@ -29,10 +29,41 @@ enum room_type_t {
 
 enum formation_name_t {MI, PI};
 
-Teacher* teachers;
-Room* rooms;
-Promotion* promotions;
-Training* trainings;
+struct Promotion {
+    int id;
+    int training;
+    int nb_of_students;
+};
+
+struct Subject {
+    int name;
+    int hours_per_week;
+    int room;
+};
+
+struct Training {
+    int name;
+    Subject * subjects;
+};
+
+struct Room {
+    int id;
+    int type;
+    int places;
+};
+
+struct Teacher {
+    int id;   // teacher id
+    // add specific constraint for a teacher here (vector of constraints)
+    // maybe add a struct/Class for constraints
+    int subject;
+    int hours_per_week;
+};
+
+struct Teacher* teachers;
+struct Room* rooms;
+struct Promotion* promotions;
+struct Training* trainings;
 
 \end
 
@@ -72,7 +103,8 @@ int getData()
       teachers[i] = teacher;      
   }
 
-  rooms = (Room *) malloc(doc["rooms"].Size()*sizeof(Teacher));
+
+  rooms = (Room *) malloc(doc["rooms"].Size()*sizeof(Room));
   for (rapidjson::SizeType i = 0; i < doc["rooms"].Size(); i++)
   {
       Room room;
@@ -96,12 +128,12 @@ int getData()
       Promotion promotion;
       promotion.id = i;
       if(doc["promotions"][i]["training"] == "MI")
-        promotion.type = MI;
+        promotion.training = MI;
         else if(doc["promotions"][i]["training"] == "PI")
-        promotion.type = PI;
+        promotion.training = PI;
         else
             std::cerr << doc["promotions"][i]["training"].GetString() << " is not a training" << std::endl;
-      promotion.places = doc["promotions"][i]["nb_of_students"].GetInt();
+      promotion.nb_of_students = doc["promotions"][i]["nb_of_students"].GetInt();
 
       promotions[i] = promotion;      
   }
@@ -109,11 +141,11 @@ int getData()
   trainings = (Training *) malloc(doc["trainings"].Size()*sizeof(Training));
   for (rapidjson::SizeType i = 0; i < doc["trainings"].Size(); i++)
   {
-      Promotion promotion;
+      Training training;
       if(doc["trainings"][i]["name"] == "MI")
-        promotion.type = MI;
+        training.name = MI;
         else if(doc["trainings"][i]["name"] == "PI")
-        promotion.type = PI;
+        training.name = PI;
         else
             std::cerr << doc["trainings"][i]["name"].GetString() << " is not a training" << std::endl;
       Subject* subjects = (Subject *) malloc(doc["trainings"][i]["subjects"].Size()*sizeof(Subject));
@@ -130,16 +162,29 @@ int getData()
         subject.name = ENGLISH;
         else
             std::cerr << doc["trainings"][i]["subjects"][j]["name"].GetString() << " is not a subject" << std::endl;
-        subjects[i]=subject
+        subject.hours_per_week = doc["trainings"][i]["subjects"][j]["hours_per_week"].GetInt();
+         if(doc["trainings"][i]["subjects"][j]["room"] == "TP")
+        subject.room = TP;
+        else if(doc["trainings"][i]["subjects"][j]["room"] == "TD")
+        subject.room = TD;
+        else if(doc["trainings"][i]["subjects"][j]["room"] == "labo")
+        subject.room = LABO;
+        else
+            std::cerr << doc["trainings"][i]["subjects"][j]["room"].GetString() << " is not a type of room" << std::endl;
+        subjects[i]=subject;
       }
 
-      promotion[i].subjects = subjects;
+      training.subjects = subjects;
 
-      promotions[i] = promotion;      
+      trainings[i] = training;      
   }
 
+  return 0;
+}
 
-
+int showData()
+{
+      std::cout << "DEBUG : " << trainings[0].subjects[0].hours_per_week << std::endl; 
 }
 \end
 
@@ -147,7 +192,9 @@ int getData()
 \end
 
 \Before everything else function:
-getData();
+getData(); // To store data from json in arrays
+// TODO do the same for constraints
+showData(); // To debug
 \end
 
 \After everything else function:
@@ -163,36 +210,7 @@ getData();
 \end
 
 \User classes :
-Promotion {
-    int id;
-    int training;
-    int nb_of_students;
-}
 
-Subject {
-    int name;
-    int hours_per_week;
-    int room;
-}
-
-Training {
-    int name;
-    Subject * subjects;
-}
-
-Room {
-    int id;
-    int type;
-    int places;
-}
-
-Teacher {
-    int id;   // teacher id
-    // add specific constraint for a teacher here (vector of constraints)
-    // maybe add a struct/Class for constraints
-    int subject;
-    int hours_per_week;
-}
 
 Course {
     int subject;

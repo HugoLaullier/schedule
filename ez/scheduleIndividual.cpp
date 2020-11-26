@@ -54,10 +54,41 @@ enum room_type_t {
 
 enum formation_name_t {MI, PI};
 
-Teacher* teachers;
-Room* rooms;
-Promotion* promotions;
-Training* trainings;
+struct Promotion {
+    int id;
+    int training;
+    int nb_of_students;
+};
+
+struct Subject {
+    int name;
+    int hours_per_week;
+    int room;
+};
+
+struct Training {
+    int name;
+    Subject * subjects;
+};
+
+struct Room {
+    int id;
+    int type;
+    int places;
+};
+
+struct Teacher {
+    int id;   // teacher id
+    // add specific constraint for a teacher here (vector of constraints)
+    // maybe add a struct/Class for constraints
+    int subject;
+    int hours_per_week;
+};
+
+struct Teacher* teachers;
+struct Room* rooms;
+struct Promotion* promotions;
+struct Training* trainings;
 
 
 
@@ -65,7 +96,7 @@ Training* trainings;
 
 // User functions
 
-#line 40 "ez/schedule.ez"
+#line 71 "ez/schedule.ez"
 
 int getData()
 {
@@ -102,7 +133,8 @@ int getData()
       teachers[i] = teacher;      
   }
 
-  rooms = (Room *) malloc(doc["rooms"].Size()*sizeof(Teacher));
+
+  rooms = (Room *) malloc(doc["rooms"].Size()*sizeof(Room));
   for (rapidjson::SizeType i = 0; i < doc["rooms"].Size(); i++)
   {
       Room room;
@@ -126,12 +158,12 @@ int getData()
       Promotion promotion;
       promotion.id = i;
       if(doc["promotions"][i]["training"] == "MI")
-        promotion.type = MI;
+        promotion.training = MI;
         else if(doc["promotions"][i]["training"] == "PI")
-        promotion.type = PI;
+        promotion.training = PI;
         else
             std::cerr << doc["promotions"][i]["training"].GetString() << " is not a training" << std::endl;
-      promotion.places = doc["promotions"][i]["nb_of_students"].GetInt();
+      promotion.nb_of_students = doc["promotions"][i]["nb_of_students"].GetInt();
 
       promotions[i] = promotion;      
   }
@@ -139,11 +171,11 @@ int getData()
   trainings = (Training *) malloc(doc["trainings"].Size()*sizeof(Training));
   for (rapidjson::SizeType i = 0; i < doc["trainings"].Size(); i++)
   {
-      Promotion promotion;
+      Training training;
       if(doc["trainings"][i]["name"] == "MI")
-        promotion.type = MI;
+        training.name = MI;
         else if(doc["trainings"][i]["name"] == "PI")
-        promotion.type = PI;
+        training.name = PI;
         else
             std::cerr << doc["trainings"][i]["name"].GetString() << " is not a training" << std::endl;
       Subject* subjects = (Subject *) malloc(doc["trainings"][i]["subjects"].Size()*sizeof(Subject));
@@ -160,29 +192,43 @@ int getData()
         subject.name = ENGLISH;
         else
             std::cerr << doc["trainings"][i]["subjects"][j]["name"].GetString() << " is not a subject" << std::endl;
-        subjects[i]=subject
+        subject.hours_per_week = doc["trainings"][i]["subjects"][j]["hours_per_week"].GetInt();
+         if(doc["trainings"][i]["subjects"][j]["room"] == "TP")
+        subject.room = TP;
+        else if(doc["trainings"][i]["subjects"][j]["room"] == "TD")
+        subject.room = TD;
+        else if(doc["trainings"][i]["subjects"][j]["room"] == "labo")
+        subject.room = LABO;
+        else
+            std::cerr << doc["trainings"][i]["subjects"][j]["room"].GetString() << " is not a type of room" << std::endl;
+        subjects[i]=subject;
       }
 
-      promotion[i].subjects = subjects;
+      training.subjects = subjects;
 
-      promotions[i] = promotion;      
+      trainings[i] = training;      
   }
 
+  return 0;
+}
 
-
+int showData()
+{
+      std::cout << "DEBUG : " << trainings[0].subjects[0].hours_per_week << std::endl; 
 }
 
 
 // Initialisation function
 void EASEAInitFunction(int argc, char *argv[]){
-#line 149 "ez/schedule.ez"
+#line 194 "ez/schedule.ez"
 
 getData();
+showData();
 }
 
 // Finalization function
 void EASEAFinalization(CPopulation* population){
-#line 153 "ez/schedule.ez"
+#line 199 "ez/schedule.ez"
 
 }
 
@@ -207,9 +253,9 @@ void scheduleFinal(CPopulation* pop){
 }
 
 void EASEABeginningGenerationFunction(CEvolutionaryAlgorithm* evolutionaryAlgorithm){
-	#line 264 "ez/schedule.ez"
+	#line 280 "ez/schedule.ez"
 {
-#line 156 "ez/schedule.ez"
+#line 202 "ez/schedule.ez"
 
 }
 }
@@ -231,7 +277,7 @@ IndividualImpl::IndividualImpl() : CIndividual() {
       schedules=NULL;
  
   // Genome Initialiser
-#line 216 "ez/schedule.ez"
+#line 233 "ez/schedule.ez"
  
 
   valid = false;
@@ -255,7 +301,7 @@ float IndividualImpl::evaluate(){
     return fitness;
   else{
     valid = true;
-    #line 226 "ez/schedule.ez"
+    #line 243 "ez/schedule.ez"
  // Returns the score
 
   }
@@ -328,7 +374,7 @@ CIndividual* IndividualImpl::crossover(CIndividual** ps){
 
 	// ********************
 	// Problem specific part
-  	#line 219 "ez/schedule.ez"
+  	#line 236 "ez/schedule.ez"
 
 // create child (initialized to parent1) out of parent1 and parent2 
 
@@ -365,7 +411,7 @@ void IndividualImpl::mutate( float pMutationPerGene ){
 
   // ********************
   // Problem specific part
-  #line 223 "ez/schedule.ez"
+  #line 240 "ez/schedule.ez"
  // all the values in here are found by trial and error
 
 }
