@@ -1,0 +1,11 @@
+*.o
+Emploi-du-temps-simple.pdf
+.vscode
+schedule
+schedule.cpp
+schedule.dat
+schedule.mak
+schedule.prm
+scheduleIndividual.cpp
+scheduleIndividual.hpp
+Makefile
