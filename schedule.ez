@@ -11,11 +11,10 @@ LAULLIER Hugo
 #include <fstream>
 #include <iostream>
 #include <vector>
+
+#define DEBUG false
+
 #define NB_SLOTS 4*5 // verif nb of weeks.
-#define NB_COURSES 10 // 10 courses per schedule at maximum
-
-#define NB_SUBJECTS 4
-
 #define EMPTY -1
 
 enum subject_t {
@@ -197,10 +196,6 @@ int getData() {
   return 0;
 }
 
-void showData() {
-    std::cout << "DEBUG : " << trainings[0].subjects[0].hours_per_week << 
-    std::endl; 
-}
 \end
 
 \User CUDA:
@@ -209,7 +204,6 @@ void showData() {
 \Before everything else function:
 getData(); // To store data from json in arrays
 // TODO do the same for constraints
-showData(); // To debug
 \end
 
 \After everything else function:
@@ -236,7 +230,7 @@ GenomeClass {
 \end
 
 \GenomeClass::initializer :
-courses = (int*) malloc(nb_promotions*NB_SLOTS*2*sizeof(int));
+Genome.courses = (int*) malloc(nb_promotions*NB_SLOTS*2*sizeof(int));
 for (size_t i = 0; i < nb_promotions; i++) {
     for (size_t j = 0; j < NB_SLOTS; j++)
     {
@@ -244,19 +238,46 @@ for (size_t i = 0; i < nb_promotions; i++) {
         Genome.courses[2*NB_SLOTS*i+2*j+1]=(int)random(-1,nb_teachers-1);
     }
 }
-for (size_t i = 0; i < nb_promotions*NB_SLOTS*2; i++)
-    printf("%d,", courses[i]);
-printf("end\n");
+if(DEBUG)
+{
+    for (size_t i = 0; i < nb_promotions*NB_SLOTS*2; i++)
+        printf("%d,", Genome.courses[i]);
+    printf("end\n");
+}
 \end
 
 \GenomeClass::crossover :
+if(true)
+{
+    for (size_t i = 0; i < nb_promotions*NB_SLOTS*2; i++)
+        printf("%d,", parent1.courses[i]);
+    printf("end\n");
+}
+for (size_t i = 0; i < nb_promotions; i++) {
+    size_t nLocus = (int)random(0, NB_SLOTS);
+    for (size_t j = nLocus; j < NB_SLOTS; j++)
+    {
+        child.courses[2*NB_SLOTS*i+2*j]=parent2.courses[2*NB_SLOTS*i+2*j];
+        child.courses[2*NB_SLOTS*i+2*j+1]=parent2.courses[2*NB_SLOTS*i+2*j+1];
+    }
+}
 \end
 
 \GenomeClass::mutator: 
+for (size_t i = 0; i < nb_promotions; i++)
+{
+    float pMutPerGene = 1.0/(2*NB_SLOTS);
+    if(tossCoin(pMutPerGene))
+        for (size_t j = 0; j < NB_SLOTS; j++)
+        {
+            Genome.courses[2*NB_SLOTS*i+2*j]=(int)random(-1,nb_rooms-1); 
+            Genome.courses[2*NB_SLOTS*i+2*j+1]=(int)random(-1,nb_teachers-1);
+        }
+}
 \end
 
-\GenomeClass::evaluator: 
-return 1;
+\GenomeClass::evaluator: //TODO
+return 1000;
 \end
 
 \User Makefile options:
@@ -267,7 +288,7 @@ return 1;
     Time limit: 0                  // In seconds, 0 to deactivate
     Population size : 4096 
     Offspring size : 100% 
-    Mutation probability : 1       // MUT_PROB
+    Mutation probability : 1     // MUT_PROB
     Crossover probability : 1      // XOVER_PROB
     Evaluator goal : minimise      // Maximise
     Selection operator: Tournament 10
