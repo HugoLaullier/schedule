@@ -1,0 +1,316 @@
+/*-----------------------------------------------------------------------------
+BALZANO Antoine
+LAULLIER Hugo
+-----------------------------------------------------------------------------*/
+
+\User declarations :
+#include "include/rapidjson/document.h"
+#include "include/rapidjson/istreamwrapper.h"
+#include "include/rapidjson/writer.h"
+#include "include/rapidjson/stringbuffer.h"
+#include <fstream>
+#include <iostream>
+#include <vector>
+
+#define DEBUG false
+
+#define NB_SLOTS 4*5 // verif nb of weeks.
+#define EMPTY -1
+
+enum subject_t {
+    MATHEMATICS, 
+    PHYSICS, 
+    COMPUTER_SCIENCE,
+    ENGLISH
+};
+
+#define NB_ROOM_TYPES 3
+enum room_type_t {
+    TP,
+    TD,
+    LABO
+};
+
+enum formation_name_t {MI, PI};
+
+struct Promotion {
+    int id;
+    int training;
+    int nb_of_students;
+};
+
+struct Subject {
+    int name;
+    int hours_per_week;
+    int room;
+};
+
+struct Training {
+    int name;
+    Subject * subjects;
+};
+
+struct Room {
+    int id;
+    int type;
+    int places;
+};
+
+struct Teacher {
+    int id; // teacher id
+    // add specific constraint for a teacher here (vector of constraints)
+    // maybe add a struct/Class for constraints
+    int subject;
+    int hours_per_week;
+};
+
+size_t nb_teachers;
+size_t nb_rooms;
+size_t nb_promotions;
+size_t nb_trainings;
+struct Teacher* teachers;
+struct Room* rooms;
+struct Promotion* promotions;
+struct Training* trainings;
+
+\end
+
+\User functions:
+int getData() {
+    ifstream ifs("json/in/data.json");
+    if (!ifs.is_open()) {
+        std::cerr << "Could not open file for reading!\n";
+        return EXIT_FAILURE;
+    }
+
+    rapidjson::IStreamWrapper isw(ifs);
+
+    rapidjson::Document doc{};
+    doc.ParseStream(isw);
+    nb_teachers = doc["teachers"].Size();
+    teachers = (Teacher *) malloc(nb_teachers*sizeof(Teacher));
+
+    for (rapidjson::SizeType i = 0; i < nb_teachers; i++) {
+        Teacher teacher;
+        teacher.id = i;
+        if(doc["teachers"][i]["subject"] == "Mathematics")
+        teacher.subject = MATHEMATICS;
+        else if(doc["teachers"][i]["subject"] == "Physics")
+        teacher.subject = PHYSICS;
+        else if(doc["teachers"][i]["subject"] == "Computer Science")
+        teacher.subject = COMPUTER_SCIENCE;
+        else if(doc["teachers"][i]["subject"] == "English")
+        teacher.subject = ENGLISH;
+        else
+            std::cerr << doc["teachers"][i]["subject"].GetString() << " is not"
+            " a subject" << std::endl;
+        teacher.hours_per_week = doc["teachers"][i]["hours_per_week"].GetInt();
+
+        teachers[i] = teacher;
+    }
+
+    nb_rooms = doc["rooms"].Size();
+    rooms = (Room *) malloc(nb_rooms*sizeof(Room));
+    for (rapidjson::SizeType i = 0; i < nb_rooms; i++) {
+        Room room;
+        room.id = i;
+        if(doc["rooms"][i]["type"] == "TP")
+        room.type = TP;
+        else if(doc["rooms"][i]["type"] == "TD")
+        room.type = TD;
+        else if(doc["rooms"][i]["type"] == "labo")
+        room.type = LABO;
+        else
+            std::cerr << doc["rooms"][i]["type"].GetString() << " is not a type"
+            " of room" << std::endl;
+        room.places = doc["rooms"][i]["places"].GetInt();
+        rooms[i] = room;
+    }
+
+    nb_promotions = doc["promotions"].Size();
+    promotions = (Promotion *) malloc(nb_promotions*sizeof(Promotion));
+    for (rapidjson::SizeType i = 0; i < nb_promotions; i++) {
+        Promotion promotion;
+        promotion.id = i;
+        if(doc["promotions"][i]["training"] == "MI")
+        promotion.training = MI;
+        else if(doc["promotions"][i]["training"] == "PI")
+        promotion.training = PI;
+        else
+            std::cerr << doc["promotions"][i]["training"].GetString() << " is"
+            " not a training" << std::endl;
+        promotion.nb_of_students = 
+            doc["promotions"][i]["nb_of_students"].GetInt();
+        promotions[i] = promotion;
+    }
+
+    nb_trainings = doc["trainings"].Size();
+    trainings = (Training *) malloc(nb_trainings*sizeof(Training));
+    for (rapidjson::SizeType i = 0; i < nb_trainings; i++) {
+        Training training;
+        if(doc["trainings"][i]["name"] == "MI")
+        training.name = MI;
+        else if(doc["trainings"][i]["name"] == "PI")
+        training.name = PI;
+        else
+            std::cerr << doc["trainings"][i]["name"].GetString() << " is not a"
+            " training" << std::endl;
+        Subject* subjects = (Subject *) malloc(
+            doc["trainings"][i]["subjects"].Size()*sizeof(Subject));
+        for (rapidjson::SizeType j = 0; 
+             j < doc["trainings"][i]["subjects"].Size(); 
+             j++) {
+            Subject subject;
+            if(doc["trainings"][i]["subjects"][j]["name"] == "Mathematics")
+            subject.name = MATHEMATICS;
+            else if(doc["trainings"][i]["subjects"][j]["name"] == "Physics")
+            subject.name = PHYSICS;
+            else if(doc["trainings"][i]["subjects"][j]["name"] == 
+                "Computer Science")
+            subject.name = COMPUTER_SCIENCE;
+            else if(doc["trainings"][i]["subjects"][j]["name"] == "English")
+            subject.name = ENGLISH;
+            else
+                std::cerr << 
+                doc["trainings"][i]["subjects"][j]["name"].GetString() << 
+                " is not a subject" << std::endl;
+            subject.hours_per_week = 
+                doc["trainings"][i]["subjects"][j]["hours_per_week"].GetInt();
+                if(doc["trainings"][i]["subjects"][j]["room"] == "TP")
+            subject.room = TP;
+            else if(doc["trainings"][i]["subjects"][j]["room"] == "TD")
+            subject.room = TD;
+            else if(doc["trainings"][i]["subjects"][j]["room"] == "labo")
+            subject.room = LABO;
+            else
+                std::cerr << 
+                doc["trainings"][i]["subjects"][j]["room"].GetString() << 
+                " is not a type of room" << std::endl;
+            subjects[i]=subject;
+        }
+
+        training.subjects = subjects;
+        trainings[i] = training;
+    }
+
+  return 0;
+}
+
+\end
+
+\User CUDA:
+\end
+
+\Before everything else function:
+getData(); // To store data from json in arrays
+// TODO do the same for constraints
+\end
+
+\After everything else function:
+\end
+
+\At the beginning of each generation function:
+\end
+
+\At the end of each generation function:
+\end
+
+\At each generation before reduce function:
+\end
+
+\User classes :
+GenomeClass {
+    // 1st element : room id
+    // 2nd element : teacher id
+    int * courses; 
+}
+\end
+
+\GenomeClass::display:
+\end
+
+\GenomeClass::initializer :
+Genome.courses = (int*) malloc(nb_promotions*NB_SLOTS*2*sizeof(int));
+for (size_t i = 0; i < nb_promotions; i++) {
+    for (size_t j = 0; j < NB_SLOTS; j++)
+    {
+        Genome.courses[2*NB_SLOTS*i+2*j]=(int)random(-1,nb_rooms-1);
+        Genome.courses[2*NB_SLOTS*i+2*j+1]=(int)random(-1,nb_teachers-1);
+    }
+}
+if(DEBUG)
+{
+    for (size_t i = 0; i < nb_promotions*NB_SLOTS*2; i++)
+        printf("%d,", Genome.courses[i]);
+    printf("end\n");
+}
+\end
+
+\GenomeClass::crossover :
+if(true)
+{
+    for (size_t i = 0; i < nb_promotions*NB_SLOTS*2; i++)
+        printf("%d,", parent1.courses[i]);
+    printf("end\n");
+}
+for (size_t i = 0; i < nb_promotions; i++) {
+    size_t nLocus = (int)random(0, NB_SLOTS);
+    for (size_t j = nLocus; j < NB_SLOTS; j++)
+    {
+        child.courses[2*NB_SLOTS*i+2*j]=parent2.courses[2*NB_SLOTS*i+2*j];
+        child.courses[2*NB_SLOTS*i+2*j+1]=parent2.courses[2*NB_SLOTS*i+2*j+1];
+    }
+}
+\end
+
+\GenomeClass::mutator: 
+for (size_t i = 0; i < nb_promotions; i++)
+{
+    float pMutPerGene = 1.0/(2*NB_SLOTS);
+    if(tossCoin(pMutPerGene))
+        for (size_t j = 0; j < NB_SLOTS; j++)
+        {
+            Genome.courses[2*NB_SLOTS*i+2*j]=(int)random(-1,nb_rooms-1); 
+            Genome.courses[2*NB_SLOTS*i+2*j+1]=(int)random(-1,nb_teachers-1);
+        }
+}
+\end
+
+\GenomeClass::evaluator: //TODO
+return 1000;
+\end
+
+\User Makefile options:
+\end
+
+\Default run parameters :
+    Number of generations : 100    // NB_GEN
+    Time limit: 0                  // In seconds, 0 to deactivate
+    Population size : 4096 
+    Offspring size : 100% 
+    Mutation probability : 1     // MUT_PROB
+    Crossover probability : 1      // XOVER_PROB
+    Evaluator goal : minimise      // Maximise
+    Selection operator: Tournament 10
+    Surviving parents: 100%        // percentage or absolute  
+    Surviving offspring: 100%
+    Reduce parents operator: Tournament 2
+    Reduce offspring operator: Tournament 2
+    Final reduce operator: Tournament 7
+    Elitism: weak   // Weak (best of parents+offspring) or 
+                    //Strong (best of parents)
+    Elite: 1
+    Print stats: true
+    Generate csv stats file:false
+    Generate gnuplot script:false
+    Generate R script:false
+    Plot stats:true
+
+    Remote island model: false      // run ./schedule --serverPort 2930
+    IP file: ip.txt                // File containing all the remote island's IP
+    Server port : 2929             // why not
+    Migration probability: 0.333 
+
+    Save population: false
+    Start from file:false
+\end

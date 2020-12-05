@@ -1,11 +1,6 @@
 {
-    "training": [{
+    "trainings": [{
         "name": "MI",
-        "class": [{
-            "numbers": 50
-        }, {
-            "numbers": 30
-        }],
         "subjects": [{
                 "name": "Mathematics",
                 "hours_per_week": 10,
@@ -39,11 +34,6 @@
         ]
     }, {
         "name": "PI",
-        "class": [{
-            "numbers": 25
-        }, {
-            "numbers": 20
-        }],
         "subjects": [{
                 "name": "Mathematics",
                 "hours_per_week": 4,
@@ -76,85 +66,85 @@
             }
         ]
     }],
+    "promotions": [{
+            "training": "MI",
+            "nb_of_students": 50
+        }, {
+            "training": "MI",
+            "nb_of_students": 30
+        },
+        {
+            "training": "PI",
+            "nb_of_students": 25
+        }, {
+            "training": "PI",
+            "nb_of_students": 20
+        }
+    ],
     "teachers": [{
-            "id": 1,
             "subject": "Mathematics",
             "hours_per_week": 12
         },
         {
-            "id": 2,
             "subject": "Mathematics",
             "hours_per_week": 10
         },
         {
-            "id": 3,
             "subject": "Mathematics",
             "hours_per_week": 8
         },
         {
-            "id": 1,
             "subject": "Physics",
             "hours_per_week": 10
         },
         {
-            "id": 2,
             "subject": "Physics",
             "hours_per_week": 10
         },
         {
-            "id": 3,
             "subject": "Physics",
             "hours_per_week": 10
         },
         {
-            "id": 1,
-            "subject": "Compute Science",
+            "subject": "Computer Science",
             "hours_per_week": 12
         },
         {
-            "id": 2,
-            "subject": "Compute Science",
+            "subject": "Computer Science",
             "hours_per_week": 12
         },
         {
-            "id": 3,
-            "subject": "Compute Science",
+            "subject": "Computer Science",
             "hours_per_week": 12
         },
         {
-            "id": 1,
             "subject": "English",
             "hours_per_week": 12
         },
         {
-            "id": 2,
             "subject": "English",
             "hours_per_week": 4
         }
     ],
     "rooms": [{
-            "id": 1,
             "type": "TD",
             "places": 40
         },
         {
-            "id": 2,
             "type": "TD",
             "places": 40
         },
         {
-            "id": 3,
             "type": "TD",
             "places": 40
         },
         {
-            "id": 1,
             "type": "TP",
             "places": 20
         },
         {
-            "id": 1,
-            "type": "labo"
+            "type": "labo",
+            "places": 40
         }
     ]
 }
