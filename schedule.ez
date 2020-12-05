@@ -11,10 +11,13 @@ LAULLIER Hugo
 #include <fstream>
 #include <iostream>
 #include <vector>
-#define NB_SCHEDULES 4*5*36 // verif nb of weeks.
+#define NB_SLOTS 4*5 // verif nb of weeks.
 #define NB_COURSES 10 // 10 courses per schedule at maximum
 
 #define NB_SUBJECTS 4
+
+#define EMPTY -1
+
 enum subject_t {
     MATHEMATICS, 
     PHYSICS, 
@@ -223,20 +226,9 @@ showData(); // To debug
 
 \User classes :
 GenomeClass {
-
-    //int rooms     [NB_SCHEDULES*NB_COURSES];
-    //int teachers  [NB_SCHEDULES*NB_COURSES];
-    //int promotions[NB_SCHEDULES*NB_COURSES];
-    // indicate how many courses there are for each schedule at the same time
-    //j from 0 to NB_COURSES and i from 0 to NB_SCHEDULES
-
-    // element i*(1+NB_COURSES*3)+0 -> 
-    //     number of courses per schedule (from 0 to NB_COURSES)
-    //element i*(1+NB_COURSES*3)+1+j*1 -> rooms
-    //element i*(1+NB_COURSES*3)+1+NB_COURSES+j -> rooms
-    //element i*(1+NB_COURSES*3)+1+2*NB_COURSES+j -> rooms
-
-    int courses[NB_SCHEDULES*(1+NB_COURSES*3)];
+    // 1st element : room id
+    // 2nd element : teacher id
+    int * courses; 
 }
 \end
 
@@ -244,36 +236,26 @@ GenomeClass {
 \end
 
 \GenomeClass::initializer :
-printf("hello1\n");
-static int test  =0;
-test++;
-printf("hello\n");
-for (int i = 0; i < NB_SCHEDULES; i++) {
-    Genome.courses[i*(1+NB_COURSES*3)] = (int)random(0,NB_COURSES);
-    for (int j = 0; j < NB_COURSES; j++) {
-        //Genome.rooms     [i*NB_COURSES+j] = 0; //random(0,nb_rooms);
-        //Genome.teachers  [i*NB_COURSES+j] = 0; //random(0,nb_teachers);
-        //Genome.promotions[i*NB_COURSES+j] = 0; //random(0,nb_promotions);
-        //printf("%i,%i\n",i*NB_COURSES+j, NB_SCHEDULES*NB_COURSES);
-        Genome.courses[i*(1+NB_COURSES*3)+1+j]   = 0;
-        Genome.courses[i*(1+NB_COURSES*3)+1+NB_COURSES+j] = 0;
-        Genome.courses[i*(1+NB_COURSES*3)+1+2*NB_COURSES+j] = 0;
-        printf("--- %i;;%i\n", i*(1+NB_COURSES*3)+1+2*NB_COURSES+j, NB_SCHEDULES*(1+NB_COURSES*3));
-        //printf("-%i\n", (int)random(0,(int)nb_rooms));
+courses = (int*) malloc(nb_promotions*NB_SLOTS*2*sizeof(int));
+for (size_t i = 0; i < nb_promotions; i++) {
+    for (size_t j = 0; j < NB_SLOTS; j++)
+    {
+        Genome.courses[2*NB_SLOTS*i+2*j]=(int)random(-1,nb_rooms-1);
+        Genome.courses[2*NB_SLOTS*i+2*j+1]=(int)random(-1,nb_teachers-1);
     }
-    printf("%i,%i\n",i, test);
 }
+for (size_t i = 0; i < nb_promotions*NB_SLOTS*2; i++)
+    printf("%d,", courses[i]);
 printf("end\n");
 \end
 
 \GenomeClass::crossover :
-// create child (initialized to parent1) out of parent1 and parent2 
 \end
 
-\GenomeClass::mutator: // all the values in here are found by trial and error
+\GenomeClass::mutator: 
 \end
 
-\GenomeClass::evaluator: // Returns the score
+\GenomeClass::evaluator: 
 return 1;
 \end
 
