@@ -62,7 +62,7 @@
             {
                 "name": "English",
                 "hours_per_week": 4,
-                "room": "labo"
+                "room": "TP"
             }
         ]
     }],
@@ -140,10 +140,12 @@
         },
         {
             "type": "TP",
+            "subject": "Computer Science",
             "places": 20
         },
         {
-            "type": "labo",
+            "type": "TP",
+            "subject": "English",
             "places": 40
         }
     ]
