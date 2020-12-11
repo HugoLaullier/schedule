@@ -15,7 +15,7 @@ LAULLIER Hugo
 #define DEBUG false
 
 #define NB_SLOTS 20 // verif nb of weeks. (20 = 4*5)
-#define NB_PROMOTIONS 4
+#define NB_PROMOTIONS 40
 #define EMPTY -1
 #define PENALITY_VERY_HIGH 1000000
 #define PENALITY_HIGH_TEACHER 50
@@ -75,11 +75,13 @@ struct Teacher {
 size_t nb_teachers;
 size_t nb_rooms;
 size_t nb_promotions;
+size_t nb_groups;
 size_t nb_trainings;
 struct Teacher* teachers;
 struct Room* rooms;
 struct Promotion* promotions;
 struct Training* trainings;
+size_t *groups; // size nb_promotions nb of groups per promotion
 
 \end
 
@@ -117,6 +119,7 @@ int getData() {
         teachers[i] = teacher;
     }
 
+    int min_room_size = -1;
     nb_rooms = doc["rooms"].Size();
     rooms = (Room *) malloc(nb_rooms*sizeof(Room));
     for (rapidjson::SizeType i = 0; i < nb_rooms; i++) {
@@ -149,24 +152,52 @@ int getData() {
             " of room" << std::endl;
         }
         room.nb_places = doc["rooms"][i]["places"].GetInt();
+        if (min_room_size == -1 || min_room_size > room.nb_places) {
+            min_room_size = room.nb_places;
+        }
         rooms[i] = room;
     }
-
+    // TODO check NB_PROMOTIONS > nb_promotions
     nb_promotions = doc["promotions"].Size();
-    promotions = (Promotion *) malloc(nb_promotions*sizeof(Promotion));
+    nb_groups = 0;
+    groups = (size_t *) malloc(NB_PROMOTIONS*sizeof(size_t));
+    promotions = (Promotion *) malloc(NB_PROMOTIONS*sizeof(Promotion));
     for (rapidjson::SizeType i = 0; i < nb_promotions; i++) {
         Promotion promotion;
         promotion.id = i;
-        if(doc["promotions"][i]["training"] == "MI")
-            promotion.training = MI;
-        else if(doc["promotions"][i]["training"] == "PI")
-            promotion.training = PI;
-        else
-            std::cerr << doc["promotions"][i]["training"].GetString() << " is"
-            " not a training" << std::endl;
-        promotion.nb_of_students = 
-            doc["promotions"][i]["nb_of_students"].GetInt();
-        promotions[i] = promotion;
+        int n = doc["promotions"][i]["nb_of_students"].GetInt() / min_room_size;
+        for (int j = 0; j < n; j++) {
+            if(doc["promotions"][i]["training"] == "MI")
+                promotion.training = MI;
+            else if(doc["promotions"][i]["training"] == "PI")
+                promotion.training = PI;
+            else
+                std::cerr << doc["promotions"][i]["training"].GetString() << 
+                    " is not a training" << std::endl;
+            promotion.nb_of_students = min_room_size;
+            promotions[nb_groups + j] = promotion;
+        }
+        if (doc["promotions"][i]["nb_of_students"].GetInt() - min_room_size*n
+            != 0) {
+            if(doc["promotions"][i]["training"] == "MI")
+                promotion.training = MI;
+            else if(doc["promotions"][i]["training"] == "PI")
+                promotion.training = PI;
+            else
+                std::cerr << doc["promotions"][i]["training"].GetString() << 
+                    " is not a training" << std::endl;
+            promotion.nb_of_students = 
+                doc["promotions"][i]["nb_of_students"].GetInt() - min_room_size*n;
+            promotions[nb_groups + n] = promotion;
+            nb_groups += n + 1;
+            groups[i] = n + 1;
+        }
+        else {
+            nb_groups += n;
+            groups[i] = n;
+        }
+        // TODO realloc
+        // TODO divide (not DE)
     }
 
     nb_trainings = doc["trainings"].Size();
@@ -180,7 +211,6 @@ int getData() {
         else
             std::cerr << doc["trainings"][i]["name"].GetString() << " is not a"
             " training" << std::endl;
-        
         for (rapidjson::SizeType j = 0; 
              j < doc["trainings"][i]["subjects"].Size(); 
              j++) {
@@ -234,7 +264,53 @@ getData(); // To store data from json in arrays
 // TODO do the same for constraints
 \end
 
-\After everything else function:
+\After everything else function:;
+for (int i = 0; i < 5; i++) {
+    printf("-------------------- DAY %i ----------------------------\n", i+1);
+    for (int j = 0; j < 4; j++) {
+        printf("SLOT %i :\n", j+1);
+        for (size_t k = 0; k < nb_groups; k++) {
+            int room_id    = bBest->courses[2*NB_SLOTS*k+2*(i*4+j)];
+            int teacher_id = bBest->courses[2*NB_SLOTS*k+2*(i*4+j)+1];
+            printf("\t");
+            if (bBest->courses[2*NB_SLOTS*k+2*(i*4+j)+1] != -1) {
+                switch (promotions[k].training) {
+                    case MI: printf("MI"); break;
+                    case PI: printf("PI"); break;
+                }
+                printf("-%i-G%i : ",promotions[k].id, (int)groups[k]+1);
+                switch (rooms[room_id].type) {
+                    case TD: printf("TD "); break;
+                    case TP: printf("TP "); break;
+                }
+                switch (teachers[teacher_id].subject) {
+                    case MATHEMATICS:      printf("Mathematics     "); break;
+                    case PHYSICS:          printf("Physics         "); break;
+                    case COMPUTER_SCIENCE: printf("Computer Science"); break;
+                    case ENGLISH:          printf("English         "); break;
+                }
+                printf(" - teacher_id:%i", teachers[teacher_id].id);
+                printf(" - room_id:%i\n", rooms[room_id].id);
+            }
+            else {
+                printf("empty\n");
+            }
+        }
+        printf("\n");
+    }
+}
+for (size_t i = 0; i < nb_groups; i++) {
+    struct Training cur_training = trainings[promotions[i].training];
+    for (int j = 0; j < NB_SUBJECTS; j++) {
+        if (cur_training.subjects[j].room == TD) {
+            printf("td %i\n",cur_training.subjects[j].hours_per_week);
+        }
+        if (cur_training.subjects[j].room == TP) {
+            printf("tp %i\n",cur_training.subjects[j].hours_per_week);
+        }
+    }
+    printf("\n");
+}
 \end
 
 \At the beginning of each generation function:
@@ -258,21 +334,21 @@ GenomeClass {
 \end
 
 \GenomeClass::initializer :
-for (size_t i = 0; i < nb_promotions; i++) {
+for (size_t i = 0; i < nb_groups; i++) {
     for (size_t j = 0; j < NB_SLOTS; j++) {
-        Genome.courses[2*NB_SLOTS*i+2*j]   = (int)random(-1,nb_rooms-1);
-        Genome.courses[2*NB_SLOTS*i+2*j+1] = (int)random(-1,nb_teachers-1);
+        Genome.courses[2*NB_SLOTS*i+2*j]   = (int)random(0,nb_rooms);
+        Genome.courses[2*NB_SLOTS*i+2*j+1] = (int)random(-1,nb_teachers);
     }
 }
 if(DEBUG) {
-    for (size_t i = 0; i < nb_promotions*NB_SLOTS*2; i++)
+    for (size_t i = 0; i < nb_groups*NB_SLOTS*2; i++)
         printf("%d,", Genome.courses[i]);
     printf("end\n");
 }
 \end
 
 \GenomeClass::crossover :
-for (size_t i = 0; i < nb_promotions; i++) {
+for (size_t i = 0; i < nb_groups; i++) {
     size_t nLocus = (int)random(0, NB_SLOTS);
     for (size_t j = nLocus; j < NB_SLOTS; j++) {
         child.courses[2*NB_SLOTS*i+2*j]   = parent2.courses[2*NB_SLOTS*i+2*j];
@@ -282,12 +358,12 @@ for (size_t i = 0; i < nb_promotions; i++) {
 \end
 
 \GenomeClass::mutator:
-for (size_t i = 0; i < nb_promotions; i++) {
+for (size_t i = 0; i < nb_groups; i++) {
     float pMutPerGene = 1.0/(2*NB_SLOTS);
     if(tossCoin(pMutPerGene)) {
         for (size_t j = 0; j < NB_SLOTS; j++) {
-            Genome.courses[2*NB_SLOTS*i+2*j]   = (int)random(-1,nb_rooms-1); 
-            Genome.courses[2*NB_SLOTS*i+2*j+1] = (int)random(-1,nb_teachers-1);
+            Genome.courses[2*NB_SLOTS*i+2*j]   = (int)random(0,nb_rooms); 
+            Genome.courses[2*NB_SLOTS*i+2*j+1] = (int)random(-1,nb_teachers);
         }
     }
 }
@@ -299,11 +375,19 @@ int nScore = 0;
 for (size_t k = 0; k < nb_teachers; k++) {
     int worked_schedules [20] = {0};
     int nb_courses = 0;
-    for (size_t i = 0; i < nb_promotions; i++) {
-        for (size_t j = 0; j < NB_SLOTS; j++) {
-            if (Genome.courses[2*NB_SLOTS*i+2*j+1] == (int)k) {
-                worked_schedules[j] ++;
-                nb_courses += 2;
+    for (size_t l = 0; l < NB_SLOTS; l++) {
+        int n = 0; // slot parcouru // TODO translate @hugo
+        for (size_t i = 0; i < nb_promotions; i++) {
+            bool is_working = false;
+            for (size_t j = 0; j < groups[i]; j++) {
+                if (Genome.courses[2*NB_SLOTS*(n+j)+2*l+1] == (int)k) {
+                    is_working = true;
+                    nb_courses += 2;
+                }
+            }
+            n += groups[i];
+            if (is_working) {
+                worked_schedules[l] ++;
             }
         }
     }
@@ -315,6 +399,14 @@ for (size_t k = 0; k < nb_teachers; k++) {
                 // can't do 2 courses at the same time
                 nScore += PENALITY_VERY_HIGH;
             }
+        }
+        if (worked_schedules[i*4+0] || worked_schedules[i*4+1]) {
+            // low penality for half day of work
+            nScore += PENALITY_LOW_TEACHER;
+        }
+        if (worked_schedules[i*4+2] || worked_schedules[i*4+3]) {
+            // low penality for half day of work
+            nScore += PENALITY_LOW_TEACHER;
         }
         if (nb_courses_per_day == 1 || nb_courses_per_day == 4) {
             // nearly empty day or too busy day
@@ -346,19 +438,138 @@ for (size_t k = 0; k < nb_teachers; k++) {
     // TODO add specific constraints
 }
 // ROOMS CONSTRAINTS
+for (size_t l = 0; l < NB_SLOTS; l++) {
+    int n = 0; // slot parcouru // TODO translate @hugo
+    for (size_t i = 0; i < nb_promotions; i++) {
+        for (size_t j = 0; j < groups[i]; j++) {
+            bool skip_room = false;
+            for (size_t k = 1; k < groups[i]; k++) {
+                if (Genome.courses[2*NB_SLOTS*(n+k)+2*l+1] != -1 &&
+                    Genome.courses[2*NB_SLOTS*(n+j)+2*l+1] != -1 &&
+                    ((Genome.courses[2*NB_SLOTS*(n+k)+2*l+1] == 
+                     Genome.courses[2*NB_SLOTS*(n+j)+2*l+1]) && 
+                    (Genome.courses[2*NB_SLOTS*(n+k)+2*l] != 
+                     Genome.courses[2*NB_SLOTS*(n+j)+2*l]))) {
+                    // a teacher can't do 2 courses at the same time in 
+                    // different rooms, very high penality for that
+                    nScore += PENALITY_VERY_HIGH;
+                    skip_room = true;
+                    break;
+                }
+            }
+            if (skip_room) {
+                break; // is a goto legit here ?
+            }
+        }
+        n += groups[i];
+    }
+}
 
+for (size_t k = 0; k < nb_rooms; k++) {
+    for (size_t l = 0; l < NB_SLOTS; l++) {
+        int nb_student_in_room = 0;
+        int n = 0; // slot parcouru // TODO translate @hugo
+        for (size_t i = 0; i < nb_promotions; i++) {
+            for (size_t j = 0; j < groups[i]; j++) {
+                if (Genome.courses[2*NB_SLOTS*(n+j)+2*l] == (int)k) {
+                    nb_student_in_room += promotions[i].nb_of_students;
+                }
+            }
+            n += groups[i];
+        }
+        if (nb_student_in_room > rooms[k].nb_places) {
+            // maximum capacity check
+            nScore += PENALITY_VERY_HIGH;
+        }
+    }
+}
 // PROMOTIONS CONSTRAINTS
-for (size_t i = 0; i < nb_promotions; i++) {
+for (size_t i = 0; i < nb_groups; i++) {
     struct Training cur_training = trainings[promotions[i].training];
-    int count_hours[NB_SUBJECTS] = {0};
+    int count_hours_td[NB_SUBJECTS] = {0};
+    int count_hours_tp[NB_SUBJECTS] = {0};
     for (size_t j = 0; j < NB_SLOTS; j++) {
-        count_hours[teachers[Genome.courses[2*NB_SLOTS*i+2*j+1]].subject] += 2;
+        if (Genome.courses[2*NB_SLOTS*i+2*j+1] != -1) {
+            if (rooms[Genome.courses[2*NB_SLOTS*i+2*j]].type == TD) {
+                count_hours_td
+                    [teachers[Genome.courses[2*NB_SLOTS*i+2*j+1]].subject] += 2;
+            }
+            else if (rooms[Genome.courses[2*NB_SLOTS*i+2*j]].type == TP) {
+                count_hours_tp
+                    [teachers[Genome.courses[2*NB_SLOTS*i+2*j+1]].subject] += 2;
+                }
+            else {
+                (void) 0; // TODO lab
+            }
+        }
     }
     for (int j = 0; j < NB_SUBJECTS; j++) {
-        if (cur_training.subjects[j].hours_per_week != count_hours[j]) {
-            // trainings / formation need to be respected
-            nScore += PENALITY_VERY_HIGH;
-            break;
+        if (cur_training.subjects[j].room == TD) {
+            if (cur_training.subjects[j].hours_per_week != count_hours_td[j]) {
+                // trainings / formation need to be respected
+                nScore += PENALITY_VERY_HIGH*10;
+                break;
+            }
+        }
+        if (cur_training.subjects[j].room == TP) {
+            if (cur_training.subjects[j].hours_per_week != count_hours_tp[j]) {
+                // trainings / formation need to be respected
+                nScore += PENALITY_VERY_HIGH*10;
+                break;
+            }
+        }
+    }
+}
+//STUDENTS CONTRAINTS
+for (size_t i = 0; i < nb_groups; i++) {
+    int worked_schedules [20] = {0};
+    for (int j = 0; j < 5; j++) {
+        int nb_courses_per_day[NB_SUBJECTS] = {0};
+        for (int k = 0; k < 4; k++) {
+            if (Genome.courses[2*NB_SLOTS*i+2*(j*4+k)+1] != -1) {
+                worked_schedules[j*4+k] ++;
+                nb_courses_per_day[
+                    teachers[Genome.courses[
+                        2*NB_SLOTS*i+2*(j*4+k)+1]].subject]++;
+            }
+        }
+        for (int k = 0; k < NB_SUBJECTS; k++) {
+            if (nb_courses_per_day[k] >= 3) {
+                // too much courses of the same subject in one day
+                nScore += PENALITY_LOW_STUDENT;
+            }
+        }
+    }
+    for (int j = 0; j < 5; j++) {
+        int nb_courses_per_day = 0;
+        for (size_t k = 0; k < 4; k++) {
+            nb_courses_per_day ++;
+        }
+        if (worked_schedules[j*4+0] || worked_schedules[j*4+1]) {
+            // low penality for half day of work
+            nScore += PENALITY_LOW_STUDENT;
+        }
+        if (worked_schedules[j*4+2] || worked_schedules[j*4+3]) {
+            // low penality for half day of work
+            nScore += PENALITY_LOW_STUDENT;
+        }
+        if (nb_courses_per_day == 1 || nb_courses_per_day == 4) {
+            // nearly empty day or too busy day
+            nScore += PENALITY_LOW_STUDENT;
+        }
+        if (worked_schedules[j*4+0] && !worked_schedules[j*4+1] &&
+            !worked_schedules[j*4+2] && worked_schedules[j*4+3]) {
+            // large hole in a day
+            nScore += PENALITY_MEDIUM_STUDENT;
+        }
+        if ((worked_schedules[j*4+0] && 
+            !worked_schedules[j*4+1] &&
+             worked_schedules[j*4+2]) ||
+            (worked_schedules[j*4+1] && 
+            !worked_schedules[j*4+2] &&
+             worked_schedules[j*4+3])) {
+            // smale hole in a day
+            nScore += PENALITY_LOW_STUDENT;
         }
     }
 }
@@ -369,11 +580,11 @@ return nScore;
 \end
 
 \Default run parameters :
-    Number of generations : 100    // NB_GEN
+    Number of generations : 2    // NB_GEN
     Time limit: 0                  // In seconds, 0 to deactivate
-    Population size : 15000
-    Offspring size : 10000
-    Mutation probability : 1     // MUT_PROB
+    Population size : 50000
+    Offspring size : 100%
+    Mutation probability : 0.1     // MUT_PROB
     Crossover probability : 1      // XOVER_PROB
     Evaluator goal : minimise      // Maximise
     Selection operator: Tournament 10
