@@ -29,7 +29,7 @@
             {
                 "name": "English",
                 "hours_per_week": 4,
-                "room": "TP"
+                "room": "LAB"
             }
         ]
     }, {
@@ -62,7 +62,7 @@
             {
                 "name": "English",
                 "hours_per_week": 4,
-                "room": "TP"
+                "room": "LAB"
             }
         ]
     }],
@@ -144,7 +144,7 @@
             "places": 20
         },
         {
-            "type": "TP",
+            "type": "LAB",
             "subject": "English",
             "places": 50
         }

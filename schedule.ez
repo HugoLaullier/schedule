@@ -27,7 +27,7 @@ LAULLIER Hugo
 #define NB_SUBJECTS 4
 enum subject_t {
     MATHEMATICS, 
-    PHYSICS, 
+    PHYSICS,
     COMPUTER_SCIENCE,
     ENGLISH
 };
@@ -35,7 +35,8 @@ enum subject_t {
 #define NB_ROOM_TYPES 3
 enum room_type_t {
     TP,
-    TD
+    TD,
+    LAB
 };
 
 enum formation_name_t {MI, PI};
@@ -55,6 +56,7 @@ struct Subject {
 struct Training {
     int name;
     Subject subjects[NB_SUBJECTS];
+    Subject subjects_tp[NB_SUBJECTS];
 };
 
 struct Room {
@@ -115,7 +117,6 @@ int getData() {
             std::cerr << doc["teachers"][i]["subject"].GetString() << " is not"
             " a subject" << std::endl;
         teacher.hours_per_week = doc["teachers"][i]["hours_per_week"].GetInt();
-
         teachers[i] = teacher;
     }
 
@@ -125,8 +126,8 @@ int getData() {
     for (rapidjson::SizeType i = 0; i < nb_rooms; i++) {
         Room room;
         room.id = i;
-        if(doc["rooms"][i]["type"] == "TP") {
-            room.type = TP;
+        if (doc["rooms"][i]["type"] == "TP" || 
+            doc["rooms"][i]["type"] == "LAB") {
             if (doc["rooms"][i]["subject"] == "Computer Science") {
                 room.subject = COMPUTER_SCIENCE;
             }
@@ -144,8 +145,14 @@ int getData() {
                 " is not a subject of room" << std::endl;
             }
         }
+        if(doc["rooms"][i]["type"] == "TP") {
+            room.type = TP;
+        }
         else if(doc["rooms"][i]["type"] == "TD") {
             room.type = TD;
+        }
+        else if (doc["rooms"][i]["type"] == "LAB") {
+            room.type = LAB;
         }
         else {
             std::cerr << doc["rooms"][i]["type"].GetString() << " is not a type"
@@ -187,7 +194,8 @@ int getData() {
                 std::cerr << doc["promotions"][i]["training"].GetString() << 
                     " is not a training" << std::endl;
             promotion.nb_of_students = 
-                doc["promotions"][i]["nb_of_students"].GetInt() - min_room_size*n;
+                doc["promotions"][i]["nb_of_students"].GetInt() - 
+                min_room_size*n;
             promotions[nb_groups + n] = promotion;
             nb_groups += n + 1;
             groups[i] = n + 1;
@@ -224,7 +232,7 @@ int getData() {
             else if(doc["trainings"][i]["subjects"][j]["name"] == 
                 "Computer Science") {
                 subject.name = COMPUTER_SCIENCE;
-                }
+            }
             else if(doc["trainings"][i]["subjects"][j]["name"] == "English") {
                 subject.name = ENGLISH;
             }
@@ -233,25 +241,54 @@ int getData() {
                 doc["trainings"][i]["subjects"][j]["name"].GetString() << 
                 " is not a subject" << std::endl;
             }
-            subject.hours_per_week = 
-                doc["trainings"][i]["subjects"][j]["hours_per_week"].GetInt();
+            subject.hours_per_week = 0;
+            subject.room = TD;
+            training.subjects[subject.name] = subject;
+            subject.room = TP;
+            training.subjects_tp[subject.name] = subject;
+        }
+        // fill hours_per_week
+        for (rapidjson::SizeType j = 0; 
+             j < doc["trainings"][i]["subjects"].Size(); 
+             j++) {
+            int index = 0;
+            if(doc["trainings"][i]["subjects"][j]["name"] == "Mathematics") {
+                index = MATHEMATICS;
+            }
+            else if(doc["trainings"][i]["subjects"][j]["name"] == "Physics") {
+                index = PHYSICS;
+            }
+            else if(doc["trainings"][i]["subjects"][j]["name"] == 
+                "Computer Science") {
+                index = COMPUTER_SCIENCE;
+            }
+            else if(doc["trainings"][i]["subjects"][j]["name"] == "English") {
+                index = ENGLISH;
+            }
             if(doc["trainings"][i]["subjects"][j]["room"] == "TP") {
-                subject.room = TP;
+                training.subjects_tp[index].hours_per_week = 
+                    doc["trainings"][i]["subjects"][j]
+                    ["hours_per_week"].GetInt();
             }
             else if(doc["trainings"][i]["subjects"][j]["room"] == "TD") {
-                subject.room = TD;
+                training.subjects[index].hours_per_week = 
+                    doc["trainings"][i]["subjects"][j]
+                    ["hours_per_week"].GetInt();
+            }
+            else if(doc["trainings"][i]["subjects"][j]["room"] == "LAB") {
+                training.subjects[index].hours_per_week = 
+                    doc["trainings"][i]["subjects"][j]
+                    ["hours_per_week"].GetInt();
             }
             else {
                 std::cerr << 
                 doc["trainings"][i]["subjects"][j]["room"].GetString() << 
                 " is not a type of room" << std::endl;
             }
-            training.subjects[subject.name] = subject;
         }
         trainings[i] = training;
     }
-
-  return 0;
+    return 0;
 }
 
 \end
@@ -280,13 +317,14 @@ for (int i = 0; i < 5; i++) {
                 }
                 printf("-%i-G%i : ",promotions[k].id, (int)groups[k]+1);
                 switch (rooms[room_id].type) {
-                    case TD: printf("TD "); break;
-                    case TP: printf("TP "); break;
+                    case TD:  printf("TD  "); break;
+                    case TP:  printf("TP  "); break;
+                    case LAB: printf("LAB "); break;
                 }
                 switch (teachers[teacher_id].subject) {
                     case MATHEMATICS:      printf("Mathematics     "); break;
                     case PHYSICS:          printf("Physics         "); break;
-                    case COMPUTER_SCIENCE: printf("Computer Science"); break;
+                    case COMPUTER_SCIENCE: printf("Computer-Science"); break;
                     case ENGLISH:          printf("English         "); break;
                 }
                 printf(" - teacher_id:%i", teachers[teacher_id].id);
@@ -298,18 +336,6 @@ for (int i = 0; i < 5; i++) {
         }
         printf("\n");
     }
-}
-for (size_t i = 0; i < nb_groups; i++) {
-    struct Training cur_training = trainings[promotions[i].training];
-    for (int j = 0; j < NB_SUBJECTS; j++) {
-        if (cur_training.subjects[j].room == TD) {
-            printf("td %i\n",cur_training.subjects[j].hours_per_week);
-        }
-        if (cur_training.subjects[j].room == TP) {
-            printf("tp %i\n",cur_training.subjects[j].hours_per_week);
-        }
-    }
-    printf("\n");
 }
 \end
 
@@ -497,26 +523,19 @@ for (size_t i = 0; i < nb_groups; i++) {
             else if (rooms[Genome.courses[2*NB_SLOTS*i+2*j]].type == TP) {
                 count_hours_tp
                     [teachers[Genome.courses[2*NB_SLOTS*i+2*j+1]].subject] += 2;
-                }
-            else {
-                (void) 0; // TODO lab
+            }
+            else if (rooms[Genome.courses[2*NB_SLOTS*i+2*j]].type == LAB) {
+                count_hours_td
+                    [teachers[Genome.courses[2*NB_SLOTS*i+2*j+1]].subject] += 2;
             }
         }
     }
     for (int j = 0; j < NB_SUBJECTS; j++) {
-        if (cur_training.subjects[j].room == TD) {
-            if (cur_training.subjects[j].hours_per_week != count_hours_td[j]) {
-                // trainings / formation need to be respected
-                nScore += PENALITY_VERY_HIGH*10;
-                break;
-            }
-        }
-        if (cur_training.subjects[j].room == TP) {
-            if (cur_training.subjects[j].hours_per_week != count_hours_tp[j]) {
-                // trainings / formation need to be respected
-                nScore += PENALITY_VERY_HIGH*10;
-                break;
-            }
+        if ((cur_training.subjects[j].hours_per_week != count_hours_td[j]) ||
+            (cur_training.subjects_tp[j].hours_per_week != count_hours_tp[j])){
+            // trainings / formation need to be respected
+            nScore += PENALITY_VERY_HIGH*10;
+            break;
         }
     }
 }
@@ -580,11 +599,11 @@ return nScore;
 \end
 
 \Default run parameters :
-    Number of generations : 2    // NB_GEN
+    Number of generations : 200    // NB_GEN
     Time limit: 0                  // In seconds, 0 to deactivate
-    Population size : 50000
+    Population size : 120000
     Offspring size : 100%
-    Mutation probability : 0.1     // MUT_PROB
+    Mutation probability : 0.5     // MUT_PROB
     Crossover probability : 1      // XOVER_PROB
     Evaluator goal : minimise      // Maximise
     Selection operator: Tournament 10
