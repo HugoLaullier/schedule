@@ -1,3 +1,3 @@
-easena schedule.ez
+easena schedule.ez 
 make
-./schedule
+./schedule 

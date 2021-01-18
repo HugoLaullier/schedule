@@ -172,7 +172,7 @@ int getData() {
     for (rapidjson::SizeType i = 0; i < nb_promotions; i++) {
         Promotion promotion;
         promotion.id = i;
-        int n = doc["promotions"][i]["nb_of_students"].GetInt() / min_room_size;
+        int n = doc["promotions"][i]["nb_of_students"].GetInt() / min_room_size; // nb of groups in this promotion
         for (int j = 0; j < n; j++) {
             if(doc["promotions"][i]["training"] == "MI")
                 promotion.training = MI;
@@ -315,7 +315,14 @@ for (int i = 0; i < 5; i++) {
                     case MI: printf("MI"); break;
                     case PI: printf("PI"); break;
                 }
-                printf("-%i-G%i : ",promotions[k].id, (int)groups[k]+1);
+
+                int id_promo = 0;
+                for (int l = 0; l < promotions[k].id; l++)
+                    id_promo += groups[l];
+                
+                id_promo = k - id_promo + 1;
+
+                printf("-%i-G%i : ",promotions[k].id, id_promo);
                 switch (rooms[room_id].type) {
                     case TD:  printf("TD  "); break;
                     case TP:  printf("TP  "); break;
@@ -331,6 +338,18 @@ for (int i = 0; i < 5; i++) {
                 printf(" - room_id:%i\n", rooms[room_id].id);
             }
             else {
+                switch (promotions[k].training) {
+                    case MI: printf("MI"); break;
+                    case PI: printf("PI"); break;
+                }
+
+                int id_promo = 0;
+                for (int l = 0; l < promotions[k].id; l++)
+                    id_promo += groups[l];
+                
+                id_promo = k - id_promo + 1;
+
+                printf("-%i-G%i : ",promotions[k].id, id_promo);
                 printf("empty\n");
             }
         }
@@ -402,7 +421,7 @@ for (size_t k = 0; k < nb_teachers; k++) {
     int worked_schedules [20] = {0};
     int nb_courses = 0;
     for (size_t l = 0; l < NB_SLOTS; l++) {
-        int n = 0; // slot parcouru // TODO translate @hugo
+        int n = 0; // slots covered
         for (size_t i = 0; i < nb_promotions; i++) {
             bool is_working = false;
             for (size_t j = 0; j < groups[i]; j++) {
@@ -427,11 +446,11 @@ for (size_t k = 0; k < nb_teachers; k++) {
             }
         }
         if (worked_schedules[i*4+0] || worked_schedules[i*4+1]) {
-            // low penality for half day of work
+            // low penality for half day of work (fist half day)
             nScore += PENALITY_LOW_TEACHER;
         }
         if (worked_schedules[i*4+2] || worked_schedules[i*4+3]) {
-            // low penality for half day of work
+            // low penality for half day of work (second half day)
             nScore += PENALITY_LOW_TEACHER;
         }
         if (nb_courses_per_day == 1 || nb_courses_per_day == 4) {
@@ -465,9 +484,14 @@ for (size_t k = 0; k < nb_teachers; k++) {
 }
 // ROOMS CONSTRAINTS
 for (size_t l = 0; l < NB_SLOTS; l++) {
-    int n = 0; // slot parcouru // TODO translate @hugo
+    int n = 0; // slots covered
     for (size_t i = 0; i < nb_promotions; i++) {
         for (size_t j = 0; j < groups[i]; j++) {
+            // same subject for the room and for the teacher concerning TP
+            if (Genome.courses[2*NB_SLOTS*(n+j)+2*l] != -1 &&
+                rooms[Genome.courses[2*NB_SLOTS*(n+j)+2*l+1]].type == TP &&
+                teachers[Genome.courses[2*NB_SLOTS*(n+j)+2*l]].subject != rooms[Genome.courses[2*NB_SLOTS*(n+j)+2*l+1]].subject)
+                    nScore += PENALITY_VERY_HIGH;
             bool skip_room = false;
             for (size_t k = 1; k < groups[i]; k++) {
                 if (Genome.courses[2*NB_SLOTS*(n+k)+2*l+1] != -1 &&
@@ -494,7 +518,7 @@ for (size_t l = 0; l < NB_SLOTS; l++) {
 for (size_t k = 0; k < nb_rooms; k++) {
     for (size_t l = 0; l < NB_SLOTS; l++) {
         int nb_student_in_room = 0;
-        int n = 0; // slot parcouru // TODO translate @hugo
+        int n = 0; // slots covered
         for (size_t i = 0; i < nb_promotions; i++) {
             for (size_t j = 0; j < groups[i]; j++) {
                 if (Genome.courses[2*NB_SLOTS*(n+j)+2*l] == (int)k) {
@@ -534,11 +558,12 @@ for (size_t i = 0; i < nb_groups; i++) {
         if ((cur_training.subjects[j].hours_per_week != count_hours_td[j]) ||
             (cur_training.subjects_tp[j].hours_per_week != count_hours_tp[j])){
             // trainings / formation need to be respected
-            nScore += PENALITY_VERY_HIGH*10;
+            nScore += PENALITY_VERY_HIGH*50;
             break;
         }
     }
 }
+
 //STUDENTS CONTRAINTS
 for (size_t i = 0; i < nb_groups; i++) {
     int worked_schedules [20] = {0};
@@ -599,19 +624,19 @@ return nScore;
 \end
 
 \Default run parameters :
-    Number of generations : 200    // NB_GEN
+    Number of generations : 100   // NB_GEN
     Time limit: 0                  // In seconds, 0 to deactivate
-    Population size : 120000
+    Population size : 300000
     Offspring size : 100%
-    Mutation probability : 0.5     // MUT_PROB
+    Mutation probability : 0.5  // MUT_PROB
     Crossover probability : 1      // XOVER_PROB
     Evaluator goal : minimise      // Maximise
     Selection operator: Tournament 10
     Surviving parents: 100%        // percentage or absolute  
-    Surviving offspring: 100%
-    Reduce parents operator: Tournament 2
-    Reduce offspring operator: Tournament 2
-    Final reduce operator: Tournament 7
+    Surviving offspring: 70%
+    Reduce parents operator: Tournament 10
+    Reduce offspring operator: Tournament 10
+    Final reduce operator: Tournament 10
     Elitism: weak   // Weak (best of parents+offspring) or 
                     //Strong (best of parents)
     Elite: 1

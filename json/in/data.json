@@ -144,6 +144,11 @@
             "places": 20
         },
         {
+            "type": "TP",
+            "subject": "Physics",
+            "places": 20
+        },
+        {
             "type": "LAB",
             "subject": "English",
             "places": 50
