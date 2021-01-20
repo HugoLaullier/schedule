@@ -488,9 +488,14 @@ for (size_t l = 0; l < NB_SLOTS; l++) {
     for (size_t i = 0; i < nb_promotions; i++) {
         for (size_t j = 0; j < groups[i]; j++) {
             // same subject for the room and for the teacher concerning TP
-            if (Genome.courses[2*NB_SLOTS*(n+j)+2*l] != -1 &&
-                rooms[Genome.courses[2*NB_SLOTS*(n+j)+2*l+1]].type == TP &&
-                teachers[Genome.courses[2*NB_SLOTS*(n+j)+2*l]].subject != rooms[Genome.courses[2*NB_SLOTS*(n+j)+2*l+1]].subject)
+            if (Genome.courses[2*NB_SLOTS*(n+j)+2*l+1] != -1 &&
+                rooms[Genome.courses[2*NB_SLOTS*(n+j)+2*l]].type == TP &&
+                teachers[Genome.courses[2*NB_SLOTS*(n+j)+2*l+1]].subject != rooms[Genome.courses[2*NB_SLOTS*(n+j)+2*l+1]].subject)
+                    nScore += PENALITY_VERY_HIGH;
+            // english only in lab
+            if (Genome.courses[2*NB_SLOTS*(n+j)+2*l+1] != -1 &&
+                teachers[Genome.courses[2*NB_SLOTS*(n+j)+2*l+1]].subject == ENGLISH &&
+                rooms[Genome.courses[2*NB_SLOTS*(n+j)+2*l]].type != LAB)
                     nScore += PENALITY_VERY_HIGH;
             bool skip_room = false;
             for (size_t k = 1; k < groups[i]; k++) {
@@ -558,7 +563,7 @@ for (size_t i = 0; i < nb_groups; i++) {
         if ((cur_training.subjects[j].hours_per_week != count_hours_td[j]) ||
             (cur_training.subjects_tp[j].hours_per_week != count_hours_tp[j])){
             // trainings / formation need to be respected
-            nScore += PENALITY_VERY_HIGH*50;
+            nScore += PENALITY_VERY_HIGH*70;
             break;
         }
     }
@@ -571,6 +576,7 @@ for (size_t i = 0; i < nb_groups; i++) {
         int nb_courses_per_day[NB_SUBJECTS] = {0};
         for (int k = 0; k < 4; k++) {
             if (Genome.courses[2*NB_SLOTS*i+2*(j*4+k)+1] != -1) {
+                if (teachers[Genome.courses[2*NB_SLOTS*i+2*(j*4+k)+1]].subject)
                 worked_schedules[j*4+k] ++;
                 nb_courses_per_day[
                     teachers[Genome.courses[
@@ -624,20 +630,20 @@ return nScore;
 \end
 
 \Default run parameters :
-    Number of generations : 100   // NB_GEN
+    Number of generations : 300   // NB_GEN
     Time limit: 0                  // In seconds, 0 to deactivate
-    Population size : 300000
+    Population size : 260000
     Offspring size : 100%
-    Mutation probability : 0.5  // MUT_PROB
-    Crossover probability : 1      // XOVER_PROB
+    Mutation probability : 1  // MUT_PROB
+    Crossover probability : 0.3      // XOVER_PROB
     Evaluator goal : minimise      // Maximise
-    Selection operator: Tournament 10
-    Surviving parents: 100%        // percentage or absolute  
-    Surviving offspring: 70%
-    Reduce parents operator: Tournament 10
-    Reduce offspring operator: Tournament 10
-    Final reduce operator: Tournament 10
-    Elitism: weak   // Weak (best of parents+offspring) or 
+    Selection operator: Tournament 2
+    Surviving parents: 50%        // percentage or absolute  
+    Surviving offspring: 100%
+    Reduce parents operator: Tournament 2
+    Reduce offspring operator: Tournament 2
+    Final reduce operator: Tournament 2
+    Elitism: strong   // Weak (best of parents+offspring) or 
                     //Strong (best of parents)
     Elite: 1
     Print stats: true
