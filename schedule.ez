@@ -14,7 +14,7 @@ LAULLIER Hugo
 
 #define DEBUG false
 
-#define NB_SLOTS 20 // verif nb of weeks. (20 = 4*5)
+#define NB_SLOTS 20 // (20 = 4*5)
 #define NB_PROMOTIONS 40
 #define EMPTY -1
 #define PENALITY_VERY_HIGH 1000000
@@ -92,7 +92,7 @@ int getData() {
     ifstream ifs("json/in/data.json");
     if (!ifs.is_open()) {
         std::cerr << "Could not open file for reading!\n";
-        return EXIT_FAILURE;
+        exit(EXIT_FAILURE);
     }
 
     rapidjson::IStreamWrapper isw(ifs);
@@ -101,21 +101,43 @@ int getData() {
     doc.ParseStream(isw);
     nb_teachers = doc["teachers"].Size();
     teachers = (Teacher *) malloc(nb_teachers*sizeof(Teacher));
+    int nb_teachers_maths = 0;
+    int nb_teachers_physics = 0;
+    int nb_teachers_comput = 0;
+    int nb_teachers_english = 0;
 
     for (rapidjson::SizeType i = 0; i < nb_teachers; i++) {
         Teacher teacher;
-        teacher.id = i;
         if(doc["teachers"][i]["subject"] == "Mathematics")
+        {
             teacher.subject = MATHEMATICS;
+            teacher.id = nb_teachers_maths;
+            nb_teachers_maths++;
+        }
         else if(doc["teachers"][i]["subject"] == "Physics")
+        {
             teacher.subject = PHYSICS;
+            teacher.id = nb_teachers_physics;
+            nb_teachers_physics++;
+        }
         else if(doc["teachers"][i]["subject"] == "Computer Science")
+        {
             teacher.subject = COMPUTER_SCIENCE;
+            teacher.id = nb_teachers_comput;
+            nb_teachers_comput++;
+        }
         else if(doc["teachers"][i]["subject"] == "English")
+        {
+            teacher.id = nb_teachers_english;
+            nb_teachers_english++;
             teacher.subject = ENGLISH;
+        }
         else
+        {
             std::cerr << doc["teachers"][i]["subject"].GetString() << " is not"
             " a subject" << std::endl;
+            exit(EXIT_FAILURE);
+        }
         teacher.hours_per_week = doc["teachers"][i]["hours_per_week"].GetInt();
         teachers[i] = teacher;
     }
@@ -164,7 +186,6 @@ int getData() {
         }
         rooms[i] = room;
     }
-    // TODO check NB_PROMOTIONS > nb_promotions
     nb_promotions = doc["promotions"].Size();
     nb_groups = 0;
     groups = (size_t *) malloc(NB_PROMOTIONS*sizeof(size_t));
@@ -204,8 +225,6 @@ int getData() {
             nb_groups += n;
             groups[i] = n;
         }
-        // TODO realloc
-        // TODO divide (not DE)
     }
 
     nb_trainings = doc["trainings"].Size();
@@ -288,6 +307,7 @@ int getData() {
         }
         trainings[i] = training;
     }
+    ifs.close();
     return 0;
 }
 
@@ -298,64 +318,108 @@ int getData() {
 
 \Before everything else function:
 getData(); // To store data from json in arrays
-// TODO do the same for constraints
 \end
 
 \After everything else function:;
+ofstream ofs("json/out/res.json");
+if (!ofs.is_open()) {
+    std::cerr << "Could not open file for writing!\n";
+    exit(EXIT_FAILURE);
+}
+
+ofs << "{\n";
+ofs << "\t\"fitness\": " << bBest->fitness << ",\n";
+ofs << "\t\"schedule\" :\n";
+ofs << "\t{\n";
 for (int i = 0; i < 5; i++) {
     printf("-------------------- DAY %i ----------------------------\n", i+1);
+    ofs << "\t\t\"day_" << i+1 << "\" :\n";
+    ofs << "\t\t{\n";
     for (int j = 0; j < 4; j++) {
         printf("SLOT %i :\n", j+1);
+        ofs << "\t\t\t\"slot_" << j+1 << "\" :\n";
+        ofs << "\t\t\t[\n";
         for (size_t k = 0; k < nb_groups; k++) {
+            ofs << "\t\t\t\t{\n";
             int room_id    = bBest->courses[2*NB_SLOTS*k+2*(i*4+j)];
             int teacher_id = bBest->courses[2*NB_SLOTS*k+2*(i*4+j)+1];
             printf("\t");
+            switch (promotions[k].training) {
+                case MI: printf("MI"); ofs << "\t\t\t\t\t\"training\" : \"MI\",\n"; break;
+                case PI: printf("PI"); ofs << "\t\t\t\t\t\"training\" : \"PI\",\n"; break;
+            }
+            int id_promo = 0;
+            for (int l = 0; l < promotions[k].id; l++)
+                id_promo += groups[l];
+            
+            id_promo = k - id_promo + 1;
+            ofs << "\t\t\t\t\t\"promo_id\" : " << promotions[k].id << ",\n";
+            ofs << "\t\t\t\t\t\"group_id\" : " << id_promo << ",\n";
+            printf("-%i-G%i : ",promotions[k].id, id_promo);
             if (bBest->courses[2*NB_SLOTS*k+2*(i*4+j)+1] != -1) {
-                switch (promotions[k].training) {
-                    case MI: printf("MI"); break;
-                    case PI: printf("PI"); break;
-                }
-
-                int id_promo = 0;
-                for (int l = 0; l < promotions[k].id; l++)
-                    id_promo += groups[l];
-                
-                id_promo = k - id_promo + 1;
-
-                printf("-%i-G%i : ",promotions[k].id, id_promo);
                 switch (rooms[room_id].type) {
-                    case TD:  printf("TD  "); break;
-                    case TP:  printf("TP  "); break;
-                    case LAB: printf("LAB "); break;
+                    case TD:  printf("TD  "); ofs << "\t\t\t\t\t\"room_type\" : \"TD\",\n"; break;
+                    case TP:  printf("TP  "); ofs << "\t\t\t\t\t\"room_type\" : \"TP\",\n"; break;
+                    case LAB: printf("LAB "); ofs << "\t\t\t\t\t\"room_type\" : \"LAB\",\n"; break;
                 }
                 switch (teachers[teacher_id].subject) {
-                    case MATHEMATICS:      printf("Mathematics     "); break;
-                    case PHYSICS:          printf("Physics         "); break;
-                    case COMPUTER_SCIENCE: printf("Computer-Science"); break;
-                    case ENGLISH:          printf("English         "); break;
+                    case MATHEMATICS:      printf("Mathematics     "); ofs << "\t\t\t\t\t\"subject\" : \"Mathematics\",\n"; break;
+                    case PHYSICS:          printf("Physics         "); ofs << "\t\t\t\t\t\"subject\" : \"Physics\",\n"; break;
+                    case COMPUTER_SCIENCE: printf("Computer-Science"); ofs << "\t\t\t\t\t\"subject\" : \"Computer-Science\",\n"; break;
+                    case ENGLISH:          printf("English         "); ofs << "\t\t\t\t\t\"subject\" : \"English\",\n"; break;
                 }
+
+                ofs << "\t\t\t\t\t\"teacher_id\" : "<< teachers[teacher_id].id << ",\n";
+                ofs << "\t\t\t\t\t\"room_id\" : "<< rooms[room_id].id << "\n";
+
                 printf(" - teacher_id:%i", teachers[teacher_id].id);
                 printf(" - room_id:%i\n", rooms[room_id].id);
             }
-            else {
-                switch (promotions[k].training) {
-                    case MI: printf("MI"); break;
-                    case PI: printf("PI"); break;
-                }
+            else 
+            {
+                ofs << "\t\t\t\t\t\"room_type\" : \"NULL\",\n";
+                ofs << "\t\t\t\t\t\"subject\" : \"NULL\",\n";
+                ofs << "\t\t\t\t\t\"teacher_id\" : " << -1 << ",\n";
+                ofs << "\t\t\t\t\t\"room_id\" : " << -1 << "\n";
 
-                int id_promo = 0;
-                for (int l = 0; l < promotions[k].id; l++)
-                    id_promo += groups[l];
-                
-                id_promo = k - id_promo + 1;
-
-                printf("-%i-G%i : ",promotions[k].id, id_promo);
                 printf("empty\n");
             }
+            
+            if (k != nb_groups - 1)
+                ofs << "\t\t\t\t},\n";
+            else
+                ofs << "\t\t\t\t}\n";
         }
         printf("\n");
+        if (j != 3)
+            ofs << "\t\t\t],\n";
+        else            
+            ofs << "\t\t\t]\n";
     }
+    if (i != 4)
+        ofs << "\t\t},\n";
+    else
+        ofs << "\t\t}\n";
+
 }
+ofs << "\t}\n";
+ofs << "}";
+ofs.close();
+ofstream ofs2("json/out/penalities.json");
+if (!ofs2.is_open()) {
+    std::cerr << "Could not open file for writing!\n";
+    exit(EXIT_FAILURE);
+}
+ofs2 << "{\n";
+ofs2 << "\t\"Very High\": " << bBest->penalities[0] << ",\n";
+ofs2 << "\t\"High Teachers\": " << bBest->penalities[1] << ",\n";
+ofs2 << "\t\"Medium Teachers\": " << bBest->penalities[2] << ",\n";
+ofs2 << "\t\"Low Teachers\": " << bBest->penalities[3] << ",\n";
+ofs2 << "\t\"Medium Students\": " << bBest->penalities[4] << ",\n";
+ofs2 << "\t\"Low Students\": " << bBest->penalities[5] << "\n";
+ofs2 << "}\n";
+
+ofs2.close();
 \end
 
 \At the beginning of each generation function:
@@ -372,6 +436,7 @@ GenomeClass {
     // 1st element : room id
     // 2nd element : teacher id
     int courses [NB_SLOTS*NB_PROMOTIONS*2];
+    int penalities[6];
 }
 \end
 
@@ -414,8 +479,15 @@ for (size_t i = 0; i < nb_groups; i++) {
 }
 \end
 
-\GenomeClass::evaluator: //TODO
+\GenomeClass::evaluator: 
 int nScore = 0;
+Genome.penalities[0] = 0;
+Genome.penalities[1] = 0;
+Genome.penalities[2] = 0;
+Genome.penalities[3] = 0;
+Genome.penalities[4] = 0;
+Genome.penalities[5] = 0;
+
 // TEACHER CONSTRAINTS
 for (size_t k = 0; k < nb_teachers; k++) {
     int worked_schedules [20] = {0};
@@ -443,24 +515,30 @@ for (size_t k = 0; k < nb_teachers; k++) {
             if (worked_schedules[i*4+j] > 1) {
                 // can't do 2 courses at the same time
                 nScore += PENALITY_VERY_HIGH;
+                Genome.penalities[0]++;
             }
         }
         if (worked_schedules[i*4+0] || worked_schedules[i*4+1]) {
             // low penality for half day of work (fist half day)
             nScore += PENALITY_LOW_TEACHER;
+            Genome.penalities[3]++;
         }
         if (worked_schedules[i*4+2] || worked_schedules[i*4+3]) {
             // low penality for half day of work (second half day)
             nScore += PENALITY_LOW_TEACHER;
+            Genome.penalities[3]++;
+
         }
         if (nb_courses_per_day == 1 || nb_courses_per_day == 4) {
             // nearly empty day or too busy day
             nScore += PENALITY_LOW_TEACHER;
+            Genome.penalities[3]++;
         }
         if (worked_schedules[i*4+0] && !worked_schedules[i*4+1] &&
             !worked_schedules[i*4+2] && worked_schedules[i*4+3]) {
             // large hole in a day
             nScore += PENALITY_MEDIUM_TEACHER;
+            Genome.penalities[2]++;
         }
         if ((worked_schedules[i*4+0] && 
             !worked_schedules[i*4+1] &&
@@ -470,17 +548,56 @@ for (size_t k = 0; k < nb_teachers; k++) {
             worked_schedules[i*4+3])) {
             // smale hole in a day
             nScore += PENALITY_LOW_TEACHER;
+            Genome.penalities[3]++;
         }
     }
     if (nb_courses < teachers[k].hours_per_week) {
         // under service
         nScore += PENALITY_VERY_HIGH;
+        Genome.penalities[0]++;
     }
-    if (nb_courses > teachers[k].hours_per_week) {
+    if (nb_courses > teachers[k].hours_per_week && !(teachers[k].subject == PHYSICS && teachers[k].id == 3)) {
         // additional hour
-        nScore += PENALITY_LOW_TEACHER;
+        if (teachers[k].subject == PHYSICS && teachers[k].id == 2)
+        {
+            nScore += PENALITY_MEDIUM_TEACHER;
+            Genome.penalities[2]++;
+        }
+        else
+        {
+            nScore += PENALITY_LOW_TEACHER;
+            Genome.penalities[3]++;
+        }
     }
-    // TODO add specific constraints
+
+    // particular penalities teachers
+    if (teachers[k].subject == MATHEMATICS && teachers[k].id == 1)
+    {
+        if (worked_schedules[0])
+        {
+            nScore += PENALITY_LOW_TEACHER;
+            Genome.penalities[3]++;
+        }
+        if (worked_schedules[2*4+2] || worked_schedules[2*4+3])
+        {
+            nScore += PENALITY_VERY_HIGH;
+            Genome.penalities[0]++;
+        }
+    }
+
+    if (teachers[k].subject == PHYSICS && teachers[k].id == 1)
+    {
+        if (worked_schedules[4*4+2] || worked_schedules[4*4+3])
+        {
+            nScore += PENALITY_LOW_TEACHER;
+            Genome.penalities[3]++;
+        }
+        if (worked_schedules[1*4+0] || worked_schedules[1*4+1])
+        {
+            nScore += PENALITY_HIGH_TEACHER;
+            Genome.penalities[1]++;
+        }
+    }
 }
 // ROOMS CONSTRAINTS
 for (size_t l = 0; l < NB_SLOTS; l++) {
@@ -491,12 +608,26 @@ for (size_t l = 0; l < NB_SLOTS; l++) {
             if (Genome.courses[2*NB_SLOTS*(n+j)+2*l+1] != -1 &&
                 rooms[Genome.courses[2*NB_SLOTS*(n+j)+2*l]].type == TP &&
                 teachers[Genome.courses[2*NB_SLOTS*(n+j)+2*l+1]].subject != rooms[Genome.courses[2*NB_SLOTS*(n+j)+2*l+1]].subject)
+                {
                     nScore += PENALITY_VERY_HIGH;
+                    Genome.penalities[0]++;
+                }
             // english only in lab
             if (Genome.courses[2*NB_SLOTS*(n+j)+2*l+1] != -1 &&
                 teachers[Genome.courses[2*NB_SLOTS*(n+j)+2*l+1]].subject == ENGLISH &&
                 rooms[Genome.courses[2*NB_SLOTS*(n+j)+2*l]].type != LAB)
+                {
                     nScore += PENALITY_VERY_HIGH;
+                    Genome.penalities[0]++;
+                }
+
+            if (Genome.courses[2*NB_SLOTS*(n+j)+2*l+1] != -1 &&
+                teachers[Genome.courses[2*NB_SLOTS*(n+j)+2*l+1]].subject == ENGLISH &&
+                !(l == 8 || l==9 || l==12 || l==13 || l==16 || l==17))
+                {
+                    nScore += PENALITY_VERY_HIGH;
+                    Genome.penalities[0]++;
+                }
             bool skip_room = false;
             for (size_t k = 1; k < groups[i]; k++) {
                 if (Genome.courses[2*NB_SLOTS*(n+k)+2*l+1] != -1 &&
@@ -508,12 +639,13 @@ for (size_t l = 0; l < NB_SLOTS; l++) {
                     // a teacher can't do 2 courses at the same time in 
                     // different rooms, very high penality for that
                     nScore += PENALITY_VERY_HIGH;
+                    Genome.penalities[0]++;
                     skip_room = true;
                     break;
                 }
             }
             if (skip_room) {
-                break; // is a goto legit here ?
+                break; 
             }
         }
         n += groups[i];
@@ -535,6 +667,7 @@ for (size_t k = 0; k < nb_rooms; k++) {
         if (nb_student_in_room > rooms[k].nb_places) {
             // maximum capacity check
             nScore += PENALITY_VERY_HIGH;
+            Genome.penalities[0]++;
         }
     }
 }
@@ -564,6 +697,7 @@ for (size_t i = 0; i < nb_groups; i++) {
             (cur_training.subjects_tp[j].hours_per_week != count_hours_tp[j])){
             // trainings / formation need to be respected
             nScore += PENALITY_VERY_HIGH*70;
+            Genome.penalities[0]++;
             break;
         }
     }
@@ -587,6 +721,7 @@ for (size_t i = 0; i < nb_groups; i++) {
             if (nb_courses_per_day[k] >= 3) {
                 // too much courses of the same subject in one day
                 nScore += PENALITY_LOW_STUDENT;
+                Genome.penalities[5]++;
             }
         }
     }
@@ -598,19 +733,23 @@ for (size_t i = 0; i < nb_groups; i++) {
         if (worked_schedules[j*4+0] || worked_schedules[j*4+1]) {
             // low penality for half day of work
             nScore += PENALITY_LOW_STUDENT;
+            Genome.penalities[5]++;
         }
         if (worked_schedules[j*4+2] || worked_schedules[j*4+3]) {
             // low penality for half day of work
             nScore += PENALITY_LOW_STUDENT;
+            Genome.penalities[5]++;
         }
         if (nb_courses_per_day == 1 || nb_courses_per_day == 4) {
             // nearly empty day or too busy day
             nScore += PENALITY_LOW_STUDENT;
+            Genome.penalities[5]++;
         }
         if (worked_schedules[j*4+0] && !worked_schedules[j*4+1] &&
             !worked_schedules[j*4+2] && worked_schedules[j*4+3]) {
             // large hole in a day
             nScore += PENALITY_MEDIUM_STUDENT;
+            Genome.penalities[4]++;
         }
         if ((worked_schedules[j*4+0] && 
             !worked_schedules[j*4+1] &&
@@ -620,6 +759,7 @@ for (size_t i = 0; i < nb_groups; i++) {
              worked_schedules[j*4+3])) {
             // smale hole in a day
             nScore += PENALITY_LOW_STUDENT;
+            Genome.penalities[5]++;
         }
     }
 }
@@ -630,15 +770,15 @@ return nScore;
 \end
 
 \Default run parameters :
-    Number of generations : 300   // NB_GEN
+    Number of generations : 200   // NB_GEN
     Time limit: 0                  // In seconds, 0 to deactivate
-    Population size : 260000
+    Population size : 80000
     Offspring size : 100%
     Mutation probability : 1  // MUT_PROB
     Crossover probability : 0.3      // XOVER_PROB
     Evaluator goal : minimise      // Maximise
     Selection operator: Tournament 2
-    Surviving parents: 50%        // percentage or absolute  
+    Surviving parents: 100%        // percentage or absolute  
     Surviving offspring: 100%
     Reduce parents operator: Tournament 2
     Reduce offspring operator: Tournament 2
