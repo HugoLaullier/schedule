@@ -1,9 +1,9 @@
 {
-	"Priority": 6,
-	"Very High": 60,
-	"High Teachers": 0,
-	"Medium Teachers": 5,
-	"Low Teachers": 117,
+	"Priority": 0,
+	"Very High": 39,
+	"High Teachers": 1,
+	"Medium Teachers": 3,
+	"Low Teachers": 99,
 	"Medium Students": 1,
-	"Low Students": 121
+	"Low Students": 107
 }

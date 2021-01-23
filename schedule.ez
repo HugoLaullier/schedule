@@ -194,7 +194,9 @@ int getData() {
     for (rapidjson::SizeType i = 0; i < nb_promotions; i++) {
         Promotion promotion;
         promotion.id = i;
-        int n = doc["promotions"][i]["nb_of_students"].GetInt() / min_room_size; // nb of groups in this promotion
+        // nb of groups in this promotion
+        int n = 
+            doc["promotions"][i]["nb_of_students"].GetInt() / min_room_size;
         for (int j = 0; j < n; j++) {
             if(doc["promotions"][i]["training"] == "MI")
                 promotion.training = MI;
@@ -346,38 +348,66 @@ for (int i = 0; i < 5; i++) {
             int teacher_id = bBest->courses[2*NB_SLOTS*k+2*(i*4+j)+1];
             printf("\t");
             switch (promotions[k].training) {
-                case MI: printf("MI"); ofs << "\t\t\t\t\t\"training\" : \"MI\",\n"; break;
-                case PI: printf("PI"); ofs << "\t\t\t\t\t\"training\" : \"PI\",\n"; break;
+                case MI:
+                    printf("MI");
+                    ofs << "\t\t\t\t\t\"training\" : \"MI\",\n";
+                    break;
+                case PI:
+                    printf("PI");
+                    ofs << "\t\t\t\t\t\"training\" : \"PI\",\n";
+                    break;
             }
             int id_promo = 0;
             for (int l = 0; l < promotions[k].id; l++)
                 id_promo += groups[l];
             
             id_promo = k - id_promo + 1;
-            ofs << "\t\t\t\t\t\"promo_id\" : " << promotions[k].id << ",\n";
+            ofs << "\t\t\t\t\t\"promo_id\" : " << promotions[k].id + 1 << ",\n";
             ofs << "\t\t\t\t\t\"group_id\" : " << id_promo << ",\n";
-            printf("-%i-G%i : ",promotions[k].id, id_promo);
+            printf("-%i-G%i : ",promotions[k].id+1, id_promo);
             if (bBest->courses[2*NB_SLOTS*k+2*(i*4+j)+1] != EMPTY) {
                 switch (rooms[room_id].type) {
-                    case TD:  printf("TD  "); ofs << "\t\t\t\t\t\"room_type\" : \"TD\",\n"; break;
-                    case TP:  printf("TP  "); ofs << "\t\t\t\t\t\"room_type\" : \"TP\",\n"; break;
-                    case LAB: printf("LAB "); ofs << "\t\t\t\t\t\"room_type\" : \"LAB\",\n"; break;
+                case TD:
+                    printf("TD  "); 
+                    ofs << "\t\t\t\t\t\"room_type\" : \"TD\",\n";
+                    break;
+                case TP:
+                    printf("TP  ");
+                    ofs << "\t\t\t\t\t\"room_type\" : \"TP\",\n";
+                    break;
+                case LAB:
+                    printf("LAB ");
+                    ofs << "\t\t\t\t\t\"room_type\" : \"LAB\",\n";
+                    break;
                 }
                 switch (teachers[teacher_id].subject) {
-                    case MATHEMATICS:      printf("Mathematics     "); ofs << "\t\t\t\t\t\"subject\" : \"Mathematics\",\n"; break;
-                    case PHYSICS:          printf("Physics         "); ofs << "\t\t\t\t\t\"subject\" : \"Physics\",\n"; break;
-                    case COMPUTER_SCIENCE: printf("Computer-Science"); ofs << "\t\t\t\t\t\"subject\" : \"Computer-Science\",\n"; break;
-                    case ENGLISH:          printf("English         "); ofs << "\t\t\t\t\t\"subject\" : \"English\",\n"; break;
+                case MATHEMATICS:
+                    printf("Mathematics     "); 
+                    ofs << "\t\t\t\t\t\"subject\" : \"Mathematics\",\n";
+                    break;
+                case PHYSICS:
+                    printf("Physics         ");
+                    ofs << "\t\t\t\t\t\"subject\" : \"Physics\",\n";
+                    break;
+                case COMPUTER_SCIENCE:
+                    printf("Computer-Science");
+                    ofs << "\t\t\t\t\t\"subject\" : \"Computer-Science\",\n";
+                    break;
+                case ENGLISH:
+                    printf("English         ");
+                    ofs << "\t\t\t\t\t\"subject\" : \"English\",\n";
+                    break;
                 }
 
-                ofs << "\t\t\t\t\t\"teacher_id\" : "<< teachers[teacher_id].id << ",\n";
-                ofs << "\t\t\t\t\t\"room_id\" : "<< rooms[room_id].id << "\n";
+                ofs << "\t\t\t\t\t\"teacher_id\" : " <<
+                    teachers[teacher_id].id << ",\n";
+                ofs << "\t\t\t\t\t\"room_id\" : " <<
+                    rooms[room_id].id << "\n";
 
                 printf(" - teacher_id:%i", teachers[teacher_id].id);
                 printf(" - room_id:%i\n", rooms[room_id].id);
             }
-            else 
-            {
+            else {
                 ofs << "\t\t\t\t\t\"room_type\" : \"NULL\",\n";
                 ofs << "\t\t\t\t\t\"subject\" : \"NULL\",\n";
                 ofs << "\t\t\t\t\t\"teacher_id\" : " << -1 << ",\n";
@@ -385,7 +415,6 @@ for (int i = 0; i < 5; i++) {
 
                 printf("empty\n");
             }
-            
             if (k != nb_groups - 1)
                 ofs << "\t\t\t\t},\n";
             else
@@ -401,7 +430,6 @@ for (int i = 0; i < 5; i++) {
         ofs << "\t\t},\n";
     else
         ofs << "\t\t}\n";
-
 }
 ofs << "\t}\n";
 ofs << "}";
@@ -559,7 +587,8 @@ for (size_t k = 0; k < nb_teachers; k++) {
         nScore += PENALITY_VERY_HIGH;
         Genome.penalities[1]++;
     }
-    if (nb_courses > teachers[k].hours_per_week && !(teachers[k].subject == PHYSICS && teachers[k].id == 3)) {
+    if (nb_courses > teachers[k].hours_per_week && 
+        !(teachers[k].subject == PHYSICS && teachers[k].id == 3)) {
         // additional hour
         if (teachers[k].subject == PHYSICS && teachers[k].id == 2)
         {
@@ -610,24 +639,24 @@ for (size_t l = 0; l < NB_SLOTS; l++) {
             // same subject for the room and for the teacher concerning TP
             if (Genome.courses[2*NB_SLOTS*(n+j)+2*l+1] != EMPTY &&
                 rooms[Genome.courses[2*NB_SLOTS*(n+j)+2*l]].type == TP &&
-                teachers[Genome.courses[2*NB_SLOTS*(n+j)+2*l+1]].subject != rooms[Genome.courses[2*NB_SLOTS*(n+j)+2*l+1]].subject)
-                {
+                teachers[Genome.courses[2*NB_SLOTS*(n+j)+2*l+1]].subject != 
+                rooms[Genome.courses[2*NB_SLOTS*(n+j)+2*l+1]].subject) {
                     nScore += PENALITY_VERY_HIGH;
                     Genome.penalities[1]++;
                 }
             // english only in lab
             if (Genome.courses[2*NB_SLOTS*(n+j)+2*l+1] != EMPTY &&
-                teachers[Genome.courses[2*NB_SLOTS*(n+j)+2*l+1]].subject == ENGLISH &&
-                rooms[Genome.courses[2*NB_SLOTS*(n+j)+2*l]].type != LAB)
-                {
+                teachers[Genome.courses[2*NB_SLOTS*(n+j)+2*l+1]].subject ==
+                 ENGLISH &&
+                rooms[Genome.courses[2*NB_SLOTS*(n+j)+2*l]].type != LAB) {
                     nScore += PENALITY_VERY_HIGH;
                     Genome.penalities[1]++;
                 }
 
             if (Genome.courses[2*NB_SLOTS*(n+j)+2*l+1] != EMPTY &&
-                teachers[Genome.courses[2*NB_SLOTS*(n+j)+2*l+1]].subject == ENGLISH &&
-                !(l == 8 || l==9 || l==12 || l==13 || l==16 || l==17))
-                {
+                teachers[Genome.courses[2*NB_SLOTS*(n+j)+2*l+1]].subject ==
+                 ENGLISH &&
+                !(l == 8 || l==9 || l==12 || l==13 || l==16 || l==17)) {
                     nScore += PENALITY_VERY_HIGH;
                     Genome.penalities[1]++;
                 }
