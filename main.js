@@ -13,7 +13,7 @@ function draw_table(data) {
     // init
     const nb_promotions = data['schedule']['day_1']['slot_1'].length;
     const offset_x = 10;
-    const offset_y = 50;
+    const offset_y = 90;
     const cell_height = 100;
     const cols = 5;
     const rows = 4;
@@ -21,17 +21,59 @@ function draw_table(data) {
     const width = canvas.width = window.innerWidth - 20;
     const height = canvas.height = nb_promotions*rows*cell_height + 
         offset_y*2 + ((nb_promotions-1)*offset_y);
-    const cell_width = (width - offset_x*2)/cols;
-    let x = offset_x;
+    const cell_width = (width - offset_x*2)/(cols+1);
+    let x = offset_x + cell_width;
     let y = offset_y;
 
     // draw table
     for (let k = 0; k < nb_promotions; k++) {
         ctx.font = '20px serif';
         ctx.fillStyle = "black";
-        ctx.fillText(data['schedule']['day_1']['slot_1'][k].training 
-            + ' group ' + data['schedule']['day_1']['slot_1'][k].group_id, 
-            5 + offset_x, offset_y*(k+1) + rows*cell_height*k - 15);
+        ctx.fillText(data['schedule']['day_1']['slot_1'][k].training + ' '
+            + data['schedule']['day_1']['slot_1'][k].promo_id.toString()
+            + ' - group ' + data['schedule']['day_1']['slot_1'][k].group_id, 
+            5 + offset_x, offset_y*(k+1) + rows*cell_height*k- 20);
+        for (let i = 0; i < cols; i++) {
+            ctx.fillStyle = "gray";
+            ctx.fillRect(x + i*cell_width, offset_y*(k+1) 
+            + rows*cell_height*k - 45, cell_width, offset_y - 45);
+            ctx.rect(x + i*cell_width, offset_y*(k+1) 
+            + rows*cell_height*k - 45, cell_width, offset_y - 45);
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "black";
+            ctx.stroke();
+            let day;
+            switch (i) {
+                case 0: day = "Monday";    break;
+                case 1: day = "Tuesday";   break;
+                case 2: day = "Wednesday"; break;
+                case 3: day = "Thursday";  break;
+                case 4: day = "Friday";    break;
+            }
+            ctx.fillStyle = "black";
+            ctx.fillText(day, x + i*cell_width + 5, 
+                offset_y*(k+1) + rows*cell_height*k - 20);
+        }
+        for (let i = 0; i < rows; i++) {
+            ctx.fillStyle = "gray";
+            ctx.fillRect(offset_x, offset_y*(k+1) + i*cell_height
+                + rows*cell_height*k, cell_width, cell_height);
+            ctx.rect(offset_x, offset_y*(k+1) + i*cell_height
+                + rows*cell_height*k, cell_width, cell_height);
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "black";
+            ctx.stroke();
+            let slot;
+            switch (i) {
+                case 0: slot = "8:00 am - 10:00 am";  break;
+                case 1: slot = "10:00 am - 12:00 am"; break;
+                case 2: slot = "14:00 pm - 16:00 pm"; break;
+                case 3: slot = "16:00 pm - 18:00 pm"; break;
+            }
+            ctx.fillStyle = "black";
+            ctx.fillText(slot, offset_x + 5 , offset_y*(k+1) + i*cell_height
+            + rows*cell_height*k + 20);
+        }
     }
     for (let i = 0; i < cols; i++) {
         for (let j = 0; j < rows; j++) {
