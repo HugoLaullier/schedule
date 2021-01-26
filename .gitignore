@@ -9,4 +9,5 @@ schedule.prm
 scheduleIndividual.cpp
 scheduleIndividual.hpp
 Makefile
+launch.sh
 *.plot
