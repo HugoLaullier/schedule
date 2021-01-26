@@ -1,1475 +1,1521 @@
 {
-    "fitness": 3.40005e+07,
-    "schedule": {
-        "day_1": {
-            "slot_1": [{
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 2,
-                    "room_type": "TP",
-                    "subject": "Computer-Science",
-                    "teacher_id": 0,
-                    "room_id": 3
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 3,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 0,
-                    "room_id": 2
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 4,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 2,
-                    "room_id": 0
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 3,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 0,
-                    "room_id": 0
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 3,
-                    "room_type": "LAB",
-                    "subject": "English",
-                    "teacher_id": 1,
-                    "room_id": 5
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 4,
-                    "group_id": 2,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                }
-            ],
-            "slot_2": [{
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 0,
-                    "room_id": 1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 3,
-                    "room_type": "TD",
-                    "subject": "Physics",
-                    "teacher_id": 2,
-                    "room_id": 2
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 4,
-                    "room_type": "TP",
-                    "subject": "Physics",
-                    "teacher_id": 1,
-                    "room_id": 3
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 1,
-                    "room_id": 1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 3,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 2,
-                    "room_id": 2
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 3,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 4,
-                    "group_id": 2,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                }
-            ],
-            "slot_3": [{
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 2,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 3,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 4,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 1,
-                    "room_id": 1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 2,
-                    "room_type": "LAB",
-                    "subject": "English",
-                    "teacher_id": 0,
-                    "room_id": 5
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 3,
-                    "room_type": "LAB",
-                    "subject": "Computer-Science",
-                    "teacher_id": 0,
-                    "room_id": 5
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 2,
-                    "room_type": "LAB",
-                    "subject": "Computer-Science",
-                    "teacher_id": 2,
-                    "room_id": 5
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 3,
-                    "room_type": "TP",
-                    "subject": "Physics",
-                    "teacher_id": 1,
-                    "room_id": 4
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 4,
-                    "group_id": 2,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                }
-            ],
-            "slot_4": [{
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 2,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 3,
-                    "room_type": "TP",
-                    "subject": "Computer-Science",
-                    "teacher_id": 2,
-                    "room_id": 4
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 4,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 2,
-                    "room_id": 1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 3,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 1,
-                    "room_id": 1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 2,
-                    "room_type": "LAB",
-                    "subject": "Physics",
-                    "teacher_id": 1,
-                    "room_id": 5
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 3,
-                    "room_type": "LAB",
-                    "subject": "Computer-Science",
-                    "teacher_id": 0,
-                    "room_id": 5
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 4,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Computer-Science",
-                    "teacher_id": 1,
-                    "room_id": 2
-                }
-            ]
-        },
-        "day_2": {
-            "slot_1": [{
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 2,
-                    "room_type": "TP",
-                    "subject": "Computer-Science",
-                    "teacher_id": 1,
-                    "room_id": 3
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 3,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 2,
-                    "room_id": 0
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 4,
-                    "room_type": "LAB",
-                    "subject": "Mathematics",
-                    "teacher_id": 1,
-                    "room_id": 5
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Physics",
-                    "teacher_id": 1,
-                    "room_id": 2
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 3,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 1,
-                    "room_id": 2
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 3,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 4,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "English",
-                    "teacher_id": 1,
-                    "room_id": 0
-                }
-            ],
-            "slot_2": [{
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 2,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 3,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 4,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 2,
-                    "room_type": "TP",
-                    "subject": "Computer-Science",
-                    "teacher_id": 0,
-                    "room_id": 3
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 3,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 2,
-                    "room_id": 2
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 2,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 3,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 1,
-                    "room_id": 1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 4,
-                    "group_id": 2,
-                    "room_type": "TP",
-                    "subject": "Physics",
-                    "teacher_id": 1,
-                    "room_id": 3
-                }
-            ],
-            "slot_3": [{
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 2,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 3,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 4,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Computer-Science",
-                    "teacher_id": 0,
-                    "room_id": 4
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 3,
-                    "room_type": "LAB",
-                    "subject": "Physics",
-                    "teacher_id": 0,
-                    "room_id": 5
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 2,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 3,
-                    "room_type": "TD",
-                    "subject": "Physics",
-                    "teacher_id": 2,
-                    "room_id": 1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 4,
-                    "group_id": 2,
-                    "room_type": "TP",
-                    "subject": "Physics",
-                    "teacher_id": 1,
-                    "room_id": 3
-                }
-            ],
-            "slot_4": [{
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Physics",
-                    "teacher_id": 2,
-                    "room_id": 0
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 3,
-                    "room_type": "TP",
-                    "subject": "Physics",
-                    "teacher_id": 0,
-                    "room_id": 3
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 4,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 0,
-                    "room_id": 0
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 2,
-                    "room_type": "LAB",
-                    "subject": "Mathematics",
-                    "teacher_id": 2,
-                    "room_id": 5
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 3,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 2,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 3,
-                    "room_type": "TP",
-                    "subject": "Physics",
-                    "teacher_id": 1,
-                    "room_id": 4
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 4,
-                    "group_id": 2,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                }
-            ]
-        },
-        "day_3": {
-            "slot_1": [{
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 2,
-                    "room_type": "LAB",
-                    "subject": "English",
-                    "teacher_id": 1,
-                    "room_id": 5
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 3,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 1,
-                    "room_id": 0
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 4,
-                    "room_type": "TD",
-                    "subject": "Computer-Science",
-                    "teacher_id": 2,
-                    "room_id": 1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 2,
-                    "room_id": 2
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 3,
-                    "room_type": "TP",
-                    "subject": "Computer-Science",
-                    "teacher_id": 2,
-                    "room_id": 3
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 2,
-                    "room_type": "LAB",
-                    "subject": "Computer-Science",
-                    "teacher_id": 1,
-                    "room_id": 3
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 3,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 4,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 0,
-                    "room_id": 1
-                }
-            ],
-            "slot_2": [{
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Computer-Science",
-                    "teacher_id": 1,
-                    "room_id": 2
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 3,
-                    "room_type": "LAB",
-                    "subject": "English",
-                    "teacher_id": 0,
-                    "room_id": 5
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 4,
-                    "room_type": "LAB",
-                    "subject": "English",
-                    "teacher_id": 0,
-                    "room_id": 5
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 2,
-                    "room_type": "LAB",
-                    "subject": "English",
-                    "teacher_id": 0,
-                    "room_id": 5
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 3,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 2,
-                    "room_id": 0
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 2,
-                    "room_type": "TP",
-                    "subject": "Computer-Science",
-                    "teacher_id": 0,
-                    "room_id": 3
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 3,
-                    "room_type": "LAB",
-                    "subject": "English",
-                    "teacher_id": 1,
-                    "room_id": 5
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 4,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Physics",
-                    "teacher_id": 2,
-                    "room_id": 0
-                }
-            ],
-            "slot_3": [{
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 2,
-                    "room_type": "LAB",
-                    "subject": "Mathematics",
-                    "teacher_id": 2,
-                    "room_id": 0
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 3,
-                    "room_type": "TD",
-                    "subject": "Computer-Science",
-                    "teacher_id": 0,
-                    "room_id": 1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 4,
-                    "room_type": "LAB",
-                    "subject": "English",
-                    "teacher_id": 0,
-                    "room_id": 5
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 2,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 3,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 2,
-                    "room_type": "TP",
-                    "subject": "Physics",
-                    "teacher_id": 1,
-                    "room_id": 4
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 3,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 0,
-                    "room_id": 2
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 4,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 1,
-                    "room_id": 2
-                }
-            ],
-            "slot_4": [{
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 2,
-                    "room_type": "LAB",
-                    "subject": "Mathematics",
-                    "teacher_id": 0,
-                    "room_id": 5
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 3,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 4,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 2,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 3,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 2,
-                    "room_id": 0
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 3,
-                    "room_type": "LAB",
-                    "subject": "Computer-Science",
-                    "teacher_id": 0,
-                    "room_id": 5
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 4,
-                    "group_id": 2,
-                    "room_type": "TP",
-                    "subject": "Computer-Science",
-                    "teacher_id": 1,
-                    "room_id": 4
-                }
-            ]
-        },
-        "day_4": {
-            "slot_1": [{
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 2,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 3,
-                    "room_type": "TD",
-                    "subject": "English",
-                    "teacher_id": 0,
-                    "room_id": 0
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 4,
-                    "room_type": "TP",
-                    "subject": "Computer-Science",
-                    "teacher_id": 1,
-                    "room_id": 3
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 2,
-                    "room_type": "TP",
-                    "subject": "Physics",
-                    "teacher_id": 1,
-                    "room_id": 3
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 3,
-                    "room_type": "LAB",
-                    "subject": "Mathematics",
-                    "teacher_id": 1,
-                    "room_id": 5
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Computer-Science",
-                    "teacher_id": 0,
-                    "room_id": 1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 3,
-                    "room_type": "TP",
-                    "subject": "Computer-Science",
-                    "teacher_id": 0,
-                    "room_id": 4
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 4,
-                    "group_id": 2,
-                    "room_type": "LAB",
-                    "subject": "English",
-                    "teacher_id": 1,
-                    "room_id": 5
-                }
-            ],
-            "slot_2": [{
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Computer-Science",
-                    "teacher_id": 1,
-                    "room_id": 2
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 3,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 0,
-                    "room_id": 0
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 4,
-                    "room_type": "TP",
-                    "subject": "Computer-Science",
-                    "teacher_id": 0,
-                    "room_id": 3
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 2,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 3,
-                    "room_type": "TP",
-                    "subject": "Physics",
-                    "teacher_id": 1,
-                    "room_id": 3
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 2,
-                    "room_type": "LAB",
-                    "subject": "English",
-                    "teacher_id": 1,
-                    "room_id": 5
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 3,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 4,
-                    "group_id": 2,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                }
-            ],
-            "slot_3": [{
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 0,
-                    "room_id": 1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 3,
-                    "room_type": "LAB",
-                    "subject": "Mathematics",
-                    "teacher_id": 2,
-                    "room_id": 5
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 4,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 2,
-                    "room_id": 2
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 2,
-                    "room_type": "TP",
-                    "subject": "Physics",
-                    "teacher_id": 1,
-                    "room_id": 4
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 3,
-                    "room_type": "TD",
-                    "subject": "English",
-                    "teacher_id": 1,
-                    "room_id": 0
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 2,
-                    "room_type": "TP",
-                    "subject": "Physics",
-                    "teacher_id": 1,
-                    "room_id": 3
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 3,
-                    "room_type": "LAB",
-                    "subject": "Physics",
-                    "teacher_id": 0,
-                    "room_id": 5
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 4,
-                    "group_id": 2,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                }
-            ],
-            "slot_4": [{
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 2,
-                    "room_id": 0
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 3,
-                    "room_type": "TD",
-                    "subject": "Computer-Science",
-                    "teacher_id": 0,
-                    "room_id": 2
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 4,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 2,
-                    "room_id": 0
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 2,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 3,
-                    "room_type": "LAB",
-                    "subject": "English",
-                    "teacher_id": 0,
-                    "room_id": 5
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 2,
-                    "room_type": "TP",
-                    "subject": "Physics",
-                    "teacher_id": 1,
-                    "room_id": 4
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 3,
-                    "room_type": "TP",
-                    "subject": "Physics",
-                    "teacher_id": 1,
-                    "room_id": 4
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 4,
-                    "group_id": 2,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                }
-            ]
-        },
-        "day_5": {
-            "slot_1": [{
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 2,
-                    "room_type": "LAB",
-                    "subject": "English",
-                    "teacher_id": 0,
-                    "room_id": 5
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 3,
-                    "room_type": "TP",
-                    "subject": "Computer-Science",
-                    "teacher_id": 0,
-                    "room_id": 4
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 4,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 2,
-                    "room_type": "LAB",
-                    "subject": "Mathematics",
-                    "teacher_id": 2,
-                    "room_id": 5
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 3,
-                    "room_type": "TP",
-                    "subject": "Computer-Science",
-                    "teacher_id": 1,
-                    "room_id": 4
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 2,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 3,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 4,
-                    "group_id": 2,
-                    "room_type": "TP",
-                    "subject": "Physics",
-                    "teacher_id": 2,
-                    "room_id": 4
-                }
-            ],
-            "slot_2": [{
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 2,
-                    "room_type": "TP",
-                    "subject": "Computer-Science",
-                    "teacher_id": 1,
-                    "room_id": 4
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 3,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 2,
-                    "room_id": 2
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 4,
-                    "room_type": "TD",
-                    "subject": "Physics",
-                    "teacher_id": 0,
-                    "room_id": 1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Computer-Science",
-                    "teacher_id": 1,
-                    "room_id": 2
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 3,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 2,
-                    "room_type": "LAB",
-                    "subject": "English",
-                    "teacher_id": 0,
-                    "room_id": 5
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 3,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 4,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Computer-Science",
-                    "teacher_id": 0,
-                    "room_id": 1
-                }
-            ],
-            "slot_3": [{
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 2,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 3,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 4,
-                    "room_type": "LAB",
-                    "subject": "Computer-Science",
-                    "teacher_id": 0,
-                    "room_id": 1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Computer-Science",
-                    "teacher_id": 1,
-                    "room_id": 0
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 3,
-                    "room_type": "TD",
-                    "subject": "Computer-Science",
-                    "teacher_id": 2,
-                    "room_id": 2
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Physics",
-                    "teacher_id": 0,
-                    "room_id": 1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 3,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 4,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Physics",
-                    "teacher_id": 1,
-                    "room_id": 2
-                }
-            ],
-            "slot_4": [{
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 2,
-                    "room_type": "TP",
-                    "subject": "Physics",
-                    "teacher_id": 1,
-                    "room_id": 4
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 3,
-                    "room_type": "LAB",
-                    "subject": "English",
-                    "teacher_id": 0,
-                    "room_id": 5
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 1,
-                    "group_id": 4,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 2,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "MI",
-                    "promo_id": 2,
-                    "group_id": 3,
-                    "room_type": "TD",
-                    "subject": "Mathematics",
-                    "teacher_id": 1,
-                    "room_id": 0
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 2,
-                    "room_type": "NULL",
-                    "subject": "NULL",
-                    "teacher_id": -1,
-                    "room_id": -1
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 3,
-                    "group_id": 3,
-                    "room_type": "LAB",
-                    "subject": "Computer-Science",
-                    "teacher_id": 2,
-                    "room_id": 5
-                },
-                {
-                    "training": "PI",
-                    "promo_id": 4,
-                    "group_id": 2,
-                    "room_type": "TD",
-                    "subject": "Computer-Science",
-                    "teacher_id": 1,
-                    "room_id": 2
-                }
-            ]
-        }
-    }
+	"fitness": 4.20005e+07,
+	"schedule" :
+	{
+		"day_1" :
+		{
+			"slot_1" :
+			[
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 2,
+					"room_id" : 0
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 3,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 4,
+					"room_type" : "TD",
+					"subject" : "Computer-Science",
+					"teacher_id" : 0,
+					"room_id" : 1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 3,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 2,
+					"room_type" : "LAB",
+					"subject" : "English",
+					"teacher_id" : 0,
+					"room_id" : 5
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 3,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 4,
+					"group_id" : 2,
+					"room_type" : "TP",
+					"subject" : "Physics",
+					"teacher_id" : 1,
+					"room_id" : 3
+				}
+			],
+			"slot_2" :
+			[
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 3,
+					"room_type" : "TP",
+					"subject" : "Physics",
+					"teacher_id" : 1,
+					"room_id" : 3
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 4,
+					"room_type" : "TD",
+					"subject" : "English",
+					"teacher_id" : 0,
+					"room_id" : 2
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 2,
+					"room_id" : 1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 3,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 2,
+					"room_type" : "LAB",
+					"subject" : "English",
+					"teacher_id" : 1,
+					"room_id" : 5
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 3,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 1,
+					"room_id" : 0
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 4,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Computer-Science",
+					"teacher_id" : 0,
+					"room_id" : 1
+				}
+			],
+			"slot_3" :
+			[
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 2,
+					"room_type" : "LAB",
+					"subject" : "Mathematics",
+					"teacher_id" : 1,
+					"room_id" : 5
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 3,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 4,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Computer-Science",
+					"teacher_id" : 0,
+					"room_id" : 1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 3,
+					"room_type" : "TD",
+					"subject" : "Physics",
+					"teacher_id" : 0,
+					"room_id" : 0
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 2,
+					"room_type" : "TP",
+					"subject" : "Computer-Science",
+					"teacher_id" : 1,
+					"room_id" : 3
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 3,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 0,
+					"room_id" : 1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 4,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				}
+			],
+			"slot_4" :
+			[
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 3,
+					"room_type" : "TP",
+					"subject" : "Computer-Science",
+					"teacher_id" : 1,
+					"room_id" : 3
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 4,
+					"room_type" : "TD",
+					"subject" : "English",
+					"teacher_id" : 1,
+					"room_id" : 1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 0,
+					"room_id" : 2
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 3,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 3,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 4,
+					"group_id" : 2,
+					"room_type" : "LAB",
+					"subject" : "Mathematics",
+					"teacher_id" : 1,
+					"room_id" : 5
+				}
+			]
+		},
+		"day_2" :
+		{
+			"slot_1" :
+			[
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 2,
+					"room_type" : "TP",
+					"subject" : "Computer-Science",
+					"teacher_id" : 2,
+					"room_id" : 4
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 3,
+					"room_type" : "TD",
+					"subject" : "Computer-Science",
+					"teacher_id" : 0,
+					"room_id" : 2
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 4,
+					"room_type" : "TP",
+					"subject" : "Computer-Science",
+					"teacher_id" : 1,
+					"room_id" : 3
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 2,
+					"room_type" : "LAB",
+					"subject" : "English",
+					"teacher_id" : 0,
+					"room_id" : 5
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 3,
+					"room_type" : "TP",
+					"subject" : "Physics",
+					"teacher_id" : 1,
+					"room_id" : 4
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 1,
+					"room_id" : 1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 3,
+					"room_type" : "TP",
+					"subject" : "Physics",
+					"teacher_id" : 2,
+					"room_id" : 4
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 4,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				}
+			],
+			"slot_2" :
+			[
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Computer-Science",
+					"teacher_id" : 0,
+					"room_id" : 1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 3,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 4,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 2,
+					"room_type" : "TP",
+					"subject" : "Physics",
+					"teacher_id" : 1,
+					"room_id" : 4
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 3,
+					"room_type" : "TD",
+					"subject" : "English",
+					"teacher_id" : 0,
+					"room_id" : 2
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 2,
+					"room_type" : "TP",
+					"subject" : "Physics",
+					"teacher_id" : 0,
+					"room_id" : 3
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 3,
+					"room_type" : "TD",
+					"subject" : "English",
+					"teacher_id" : 1,
+					"room_id" : 0
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 4,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Physics",
+					"teacher_id" : 2,
+					"room_id" : 1
+				}
+			],
+			"slot_3" :
+			[
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 3,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 4,
+					"room_type" : "TD",
+					"subject" : "Computer-Science",
+					"teacher_id" : 1,
+					"room_id" : 0
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 3,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 3,
+					"room_type" : "LAB",
+					"subject" : "Physics",
+					"teacher_id" : 0,
+					"room_id" : 5
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 4,
+					"group_id" : 2,
+					"room_type" : "LAB",
+					"subject" : "English",
+					"teacher_id" : 1,
+					"room_id" : 5
+				}
+			],
+			"slot_4" :
+			[
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 0,
+					"room_id" : 0
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 3,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 4,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 3,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 3,
+					"room_type" : "LAB",
+					"subject" : "Computer-Science",
+					"teacher_id" : 1,
+					"room_id" : 5
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 4,
+					"group_id" : 2,
+					"room_type" : "TP",
+					"subject" : "Physics",
+					"teacher_id" : 1,
+					"room_id" : 4
+				}
+			]
+		},
+		"day_3" :
+		{
+			"slot_1" :
+			[
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 2,
+					"room_type" : "LAB",
+					"subject" : "English",
+					"teacher_id" : 0,
+					"room_id" : 5
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 3,
+					"room_type" : "LAB",
+					"subject" : "English",
+					"teacher_id" : 1,
+					"room_id" : 5
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 4,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 2,
+					"room_id" : 0
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 1,
+					"room_id" : 1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 3,
+					"room_type" : "TP",
+					"subject" : "Computer-Science",
+					"teacher_id" : 0,
+					"room_id" : 3
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Physics",
+					"teacher_id" : 0,
+					"room_id" : 2
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 3,
+					"room_type" : "TD",
+					"subject" : "Computer-Science",
+					"teacher_id" : 0,
+					"room_id" : 2
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 4,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Computer-Science",
+					"teacher_id" : 2,
+					"room_id" : 0
+				}
+			],
+			"slot_2" :
+			[
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 2,
+					"room_type" : "TP",
+					"subject" : "Physics",
+					"teacher_id" : 0,
+					"room_id" : 3
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 3,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 1,
+					"room_id" : 0
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 4,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 2,
+					"room_id" : 2
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 3,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 3,
+					"room_type" : "LAB",
+					"subject" : "English",
+					"teacher_id" : 1,
+					"room_id" : 5
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 4,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Computer-Science",
+					"teacher_id" : 1,
+					"room_id" : 2
+				}
+			],
+			"slot_3" :
+			[
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 3,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 4,
+					"room_type" : "TP",
+					"subject" : "Physics",
+					"teacher_id" : 2,
+					"room_id" : 3
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 3,
+					"room_type" : "TP",
+					"subject" : "Computer-Science",
+					"teacher_id" : 2,
+					"room_id" : 3
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 3,
+					"room_type" : "TP",
+					"subject" : "Physics",
+					"teacher_id" : 0,
+					"room_id" : 3
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 4,
+					"group_id" : 2,
+					"room_type" : "TP",
+					"subject" : "Physics",
+					"teacher_id" : 2,
+					"room_id" : 4
+				}
+			],
+			"slot_4" :
+			[
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 2,
+					"room_type" : "TP",
+					"subject" : "Computer-Science",
+					"teacher_id" : 2,
+					"room_id" : 3
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 3,
+					"room_type" : "LAB",
+					"subject" : "Mathematics",
+					"teacher_id" : 0,
+					"room_id" : 5
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 4,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 0,
+					"room_id" : 0
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 3,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 2,
+					"room_id" : 2
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Physics",
+					"teacher_id" : 0,
+					"room_id" : 2
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 3,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 4,
+					"group_id" : 2,
+					"room_type" : "TP",
+					"subject" : "Computer-Science",
+					"teacher_id" : 2,
+					"room_id" : 4
+				}
+			]
+		},
+		"day_4" :
+		{
+			"slot_1" :
+			[
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 3,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 0,
+					"room_id" : 1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 4,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 3,
+					"room_type" : "LAB",
+					"subject" : "Mathematics",
+					"teacher_id" : 1,
+					"room_id" : 5
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 2,
+					"room_type" : "LAB",
+					"subject" : "Computer-Science",
+					"teacher_id" : 2,
+					"room_id" : 5
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 3,
+					"room_type" : "TD",
+					"subject" : "Physics",
+					"teacher_id" : 1,
+					"room_id" : 1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 4,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				}
+			],
+			"slot_2" :
+			[
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 3,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 0,
+					"room_id" : 1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 4,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 1,
+					"room_id" : 1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Physics",
+					"teacher_id" : 1,
+					"room_id" : 1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 3,
+					"room_type" : "LAB",
+					"subject" : "English",
+					"teacher_id" : 0,
+					"room_id" : 5
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Computer-Science",
+					"teacher_id" : 2,
+					"room_id" : 1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 3,
+					"room_type" : "TP",
+					"subject" : "Computer-Science",
+					"teacher_id" : 2,
+					"room_id" : 4
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 4,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				}
+			],
+			"slot_3" :
+			[
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Computer-Science",
+					"teacher_id" : 2,
+					"room_id" : 0
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 3,
+					"room_type" : "TD",
+					"subject" : "English",
+					"teacher_id" : 0,
+					"room_id" : 2
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 4,
+					"room_type" : "LAB",
+					"subject" : "Mathematics",
+					"teacher_id" : 1,
+					"room_id" : 5
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 2,
+					"room_id" : 2
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 3,
+					"room_type" : "TD",
+					"subject" : "Computer-Science",
+					"teacher_id" : 1,
+					"room_id" : 1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 2,
+					"room_type" : "LAB",
+					"subject" : "Mathematics",
+					"teacher_id" : 0,
+					"room_id" : 5
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 3,
+					"room_type" : "LAB",
+					"subject" : "Computer-Science",
+					"teacher_id" : 1,
+					"room_id" : 5
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 4,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				}
+			],
+			"slot_4" :
+			[
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 2,
+					"room_id" : 1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 3,
+					"room_type" : "TP",
+					"subject" : "Computer-Science",
+					"teacher_id" : 1,
+					"room_id" : 4
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 4,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 2,
+					"room_type" : "TP",
+					"subject" : "Computer-Science",
+					"teacher_id" : 2,
+					"room_id" : 3
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 3,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 0,
+					"room_id" : 2
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 2,
+					"room_type" : "TP",
+					"subject" : "Physics",
+					"teacher_id" : 1,
+					"room_id" : 3
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 3,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 4,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Physics",
+					"teacher_id" : 2,
+					"room_id" : 1
+				}
+			]
+		},
+		"day_5" :
+		{
+			"slot_1" :
+			[
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Physics",
+					"teacher_id" : 1,
+					"room_id" : 1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 3,
+					"room_type" : "TD",
+					"subject" : "Computer-Science",
+					"teacher_id" : 2,
+					"room_id" : 0
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 4,
+					"room_type" : "TP",
+					"subject" : "Computer-Science",
+					"teacher_id" : 1,
+					"room_id" : 4
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 1,
+					"room_id" : 2
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 3,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 1,
+					"room_id" : 2
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 3,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 4,
+					"group_id" : 2,
+					"room_type" : "LAB",
+					"subject" : "English",
+					"teacher_id" : 0,
+					"room_id" : 5
+				}
+			],
+			"slot_2" :
+			[
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 2,
+					"room_type" : "LAB",
+					"subject" : "English",
+					"teacher_id" : 1,
+					"room_id" : 5
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 3,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 1,
+					"room_id" : 1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 4,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 2,
+					"room_type" : "LAB",
+					"subject" : "English",
+					"teacher_id" : 0,
+					"room_id" : 5
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 3,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 2,
+					"room_type" : "TP",
+					"subject" : "Physics",
+					"teacher_id" : 1,
+					"room_id" : 3
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 3,
+					"room_type" : "TP",
+					"subject" : "Physics",
+					"teacher_id" : 1,
+					"room_id" : 3
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 4,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				}
+			],
+			"slot_3" :
+			[
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 3,
+					"room_type" : "TD",
+					"subject" : "Physics",
+					"teacher_id" : 1,
+					"room_id" : 1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 4,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 2,
+					"room_type" : "TP",
+					"subject" : "Computer-Science",
+					"teacher_id" : 1,
+					"room_id" : 4
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 3,
+					"room_type" : "TD",
+					"subject" : "Computer-Science",
+					"teacher_id" : 0,
+					"room_id" : 2
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Computer-Science",
+					"teacher_id" : 2,
+					"room_id" : 1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 3,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 4,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 0,
+					"room_id" : 2
+				}
+			],
+			"slot_4" :
+			[
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 2,
+					"room_type" : "LAB",
+					"subject" : "Mathematics",
+					"teacher_id" : 1,
+					"room_id" : 5
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 3,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 1,
+					"group_id" : 4,
+					"room_type" : "TD",
+					"subject" : "Physics",
+					"teacher_id" : 1,
+					"room_id" : 1
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 2,
+					"room_type" : "TD",
+					"subject" : "Computer-Science",
+					"teacher_id" : 0,
+					"room_id" : 2
+				},
+				{
+					"training" : "MI",
+					"promo_id" : 2,
+					"group_id" : 3,
+					"room_type" : "TD",
+					"subject" : "Mathematics",
+					"teacher_id" : 0,
+					"room_id" : 1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 3,
+					"group_id" : 3,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				},
+				{
+					"training" : "PI",
+					"promo_id" : 4,
+					"group_id" : 2,
+					"room_type" : "NULL",
+					"subject" : "NULL",
+					"teacher_id" : -1,
+					"room_id" : -1
+				}
+			]
+		}
+	}
 }

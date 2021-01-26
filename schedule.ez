@@ -14,9 +14,7 @@ LAULLIER Hugo
 
 #define DEBUG false
 
-#define NB_SLOTS 20 // (20 = 4*5)
-#define NB_PROMOTIONS 40
-#define EMPTY -1
+// Penalities
 #define PENALITY_PRIORITY 120000000
 #define PENALITY_VERY_HIGH 1000000
 #define PENALITY_HIGH_TEACHER 50
@@ -24,6 +22,10 @@ LAULLIER Hugo
 #define PENALITY_LOW_TEACHER 3
 #define PENALITY_MEDIUM_STUDENT 3
 #define PENALITY_LOW_STUDENT 1
+
+#define NB_SLOTS 20 // (20 = 4*5)
+#define NB_PROMOTIONS 40
+#define EMPTY -1
 
 #define NB_SUBJECTS 4
 enum subject_t {
@@ -363,8 +365,8 @@ for (int i = 0; i < 5; i++) {
             
             id_promo = k - id_promo + 1;
             ofs << "\t\t\t\t\t\"promo_id\" : " << promotions[k].id + 1 << ",\n";
-            ofs << "\t\t\t\t\t\"group_id\" : " << id_promo << ",\n";
-            printf("-%i-G%i : ",promotions[k].id+1, id_promo);
+            ofs << "\t\t\t\t\t\"group_id\" : " << id_promo + 1 << ",\n";
+            printf("-%i-G%i : ",promotions[k].id+1, id_promo+1);
             if (bBest->courses[2*NB_SLOTS*k+2*(i*4+j)+1] != EMPTY) {
                 switch (rooms[room_id].type) {
                 case TD:
