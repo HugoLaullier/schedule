@@ -12,9 +12,10 @@ Installation depuis l'archive: unzip l'archive et se placer dans le dossier sche
  - *easena schedule.ez*
  - *make*
  - *./schedule --seed 1611279467*
-Le programme peut prendre du temps à s'éxécuter car nous avons utilisé une très grande population. Il est possible de la réduire dans le fichier schedule.ez (ligne 809)
-
-Les graines intéressantes sont données dans le fichier seed.txt
+  
+  Le programme peut prendre du temps à s'éxécuter car nous avons utilisé une très grande population. Il est possible de la réduire dans le fichier schedule.ez (ligne 809)
+  
+  Les graines intéressantes sont données dans le fichier seed.txt
 
 ## Visualisation de l'emploi du temps
 
