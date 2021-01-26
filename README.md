@@ -1,6 +1,7 @@
 # Projet emploi du temps
 
-**LAULLIER Hugo 2A SDIA**
+**LAULLIER Hugo 2A SDIA**  
+
 **BALZANO Antoine 2A SDIA**
 
 ## 1 Installation
