@@ -1,0 +1,161 @@
+{
+    "trainings": [{
+            "name": "MI",
+            "subjects": [{
+                    "name": "Mathematics",
+                    "hours_per_week": 10,
+                    "room": "TD"
+                },
+                {
+                    "name": "Physics",
+                    "hours_per_week": 2,
+                    "room": "TD"
+                },
+                {
+                    "name": "Physics",
+                    "hours_per_week": 2,
+                    "room": "TP"
+                },
+                {
+                    "name": "Computer Science",
+                    "hours_per_week": 4,
+                    "room": "TD"
+                },
+                {
+                    "name": "Computer Science",
+                    "hours_per_week": 4,
+                    "room": "TP"
+                },
+                {
+                    "name": "English",
+                    "hours_per_week": 4,
+                    "room": "LAB"
+                }
+            ]
+        },
+        {
+            "name": "PI",
+            "subjects": [{
+                    "name": "Mathematics",
+                    "hours_per_week": 4,
+                    "room": "TD"
+                },
+                {
+                    "name": "Physics",
+                    "hours_per_week": 4,
+                    "room": "TD"
+                },
+                {
+                    "name": "Physics",
+                    "hours_per_week": 6,
+                    "room": "TP"
+                },
+                {
+                    "name": "Computer Science",
+                    "hours_per_week": 6,
+                    "room": "TD"
+                },
+                {
+                    "name": "Computer Science",
+                    "hours_per_week": 2,
+                    "room": "TP"
+                },
+                {
+                    "name": "English",
+                    "hours_per_week": 4,
+                    "room": "LAB"
+                }
+            ]
+        }
+    ],
+    "promotions": [{
+            "training": "MI",
+            "nb_of_students": 50
+        },
+        {
+            "training": "MI",
+            "nb_of_students": 30
+        },
+        {
+            "training": "PI",
+            "nb_of_students": 25
+        },
+        {
+            "training": "PI",
+            "nb_of_students": 20
+        }
+    ],
+    "teachers": [{
+            "subject": "Mathematics",
+            "hours_per_week": 12
+        },
+        {
+            "subject": "Mathematics",
+            "hours_per_week": 10
+        },
+        {
+            "subject": "Mathematics",
+            "hours_per_week": 8
+        },
+        {
+            "subject": "Physics",
+            "hours_per_week": 10
+        },
+        {
+            "subject": "Physics",
+            "hours_per_week": 10
+        },
+        {
+            "subject": "Physics",
+            "hours_per_week": 10
+        },
+        {
+            "subject": "Computer Science",
+            "hours_per_week": 12
+        },
+        {
+            "subject": "Computer Science",
+            "hours_per_week": 12
+        },
+        {
+            "subject": "Computer Science",
+            "hours_per_week": 12
+        },
+        {
+            "subject": "English",
+            "hours_per_week": 12
+        },
+        {
+            "subject": "English",
+            "hours_per_week": 4
+        }
+    ],
+    "rooms": [{
+            "type": "TD",
+            "places": 40
+        },
+        {
+            "type": "TD",
+            "places": 40
+        },
+        {
+            "type": "TD",
+            "places": 40
+        },
+        {
+            "type": "TP",
+            "subject": "Computer Science",
+            "places": 20
+        },
+        {
+            "type": "TP",
+            "subject": "Physics",
+            "places": 20
+        },
+        {
+            "type": "LAB",
+            "subject": "English",
+            "places": 50
+        }
+    ]
+}
